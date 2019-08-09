@@ -1,0 +1,62 @@
+[
+  {
+    "bitch": "20190724001",
+    "detail": [
+      {
+        "distributionnumber": "1",
+        "distributionnumber_t": "0",
+        "littleneed": "-9",
+        "province": "1北京总部"
+      },
+      {
+        "distributionnumber": "2",
+        "distributionnumber_t": "0",
+        "littleneed": "2",
+        "province": "3天津分公司"
+      },
+      {
+        "distributionnumber": "4",
+        "distributionnumber_t": "0",
+        "littleneed": "4",
+        "province": "2北京分公司"
+      }
+    ],
+    "director": "1001ZZ10000000C5EVCI",
+    "distributionnumber": "7",
+    "distributionnumber_t": "0",
+    "invName": "SAMSUNG-S269",
+    "islock": "N",
+    "littleneed": "-3",
+    "pk_material": "1001X210000000002U47"
+  },
+  {
+    "bitch": "20190724001",
+    "detail": [
+      {
+        "distributionnumber": "3",
+        "distributionnumber_t": "0",
+        "littleneed": "2",
+        "province": "1北京总部"
+      },
+      {
+        "distributionnumber": "5",
+        "distributionnumber_t": "0",
+        "littleneed": "5",
+        "province": "3天津分公司"
+      },
+      {
+        "distributionnumber": "4",
+        "distributionnumber_t": "0",
+        "littleneed": "-159",
+        "province": "2北京分公司"
+      }
+    ],
+    "director": "1001ZZ10000000C5EVCI",
+    "distributionnumber": "12",
+    "distributionnumber_t": "0",
+    "invName": "lephone lephone A12(白色)",
+    "islock": "N",
+    "littleneed": "-152",
+    "pk_material": "1001C210000000C5Q4G7"
+  }
+]
