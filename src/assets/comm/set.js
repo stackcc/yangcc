@@ -23,7 +23,10 @@ let set = {
   map:{
     // 高德地图 key
     key:"5d20f670d207ac0bf8868daf78d9da8f"
-  }
+  },
+  log:{
+    disabled:false
+  },
 }
 
 export default { set }

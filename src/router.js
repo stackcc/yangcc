@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Stack from './views/stack.vue'
 import Home from './views/Home.vue'
 import Index from './views/index.vue'
 import MapG from './views/map-g.vue'
@@ -26,19 +27,22 @@ const router = new Router({
     // },
 
     // 正式数据
-    { path: '/', name: 'table', component: Table },
-    // { path: '/', name: 'home', component: Home,
-    //   children:[
-    //       { path: '/', name: 'index', component: Index },
-    //       { path: '/mapg', name: 'mapg', component: MapG },
-    //       { path: '/calendar', name: 'calendar', component: Calendar }
-    //   ]
-    // },
+    // { path: '/', name: 'table', component: Table },
+    { path: '/', name: 'stack', component: Stack },
+    { path: '/home', name: 'home', component: Home,
+      children:[
+          { path: '/', name: 'index', component: Index },
+          { path: '/mapg', name: 'mapg', component: MapG },
+          { path: '/calendar', name: 'calendar', component: Calendar }
+      ]
+    },
     {
       path: '/about',
       name: 'about',
       component: () => import('./views/About.vue')
-    }
+    },
+    { path: '/table', name: 'table', component: Table },
+
   ],
   scrollBehavior (to, from, savedPosition) {
     // 滚动位置
