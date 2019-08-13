@@ -41,7 +41,7 @@ const router = new Router({
       name: 'about',
       component: () => import('./views/About.vue')
     },
-    { path: '/table', name: 'table', component: Table },
+    { path: '/table', name: 'table', component: Table }
 
   ],
   scrollBehavior (to, from, savedPosition) {
