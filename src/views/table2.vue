@@ -2,9 +2,9 @@
   <div class="c_container">
     <el-main>
       <div style="width: 100%;box-sizing:border-box;text-align: center;font-size: 23px;font-weight:bold;padding: 15px;">
-        物料审核
+        审核
       </div>
-      <div style="width: 65vw;margin: auto;">
+      <div style="width: 60vw;margin: auto;">
       <el-table
         stripe
         ref="multipleTable"
@@ -26,24 +26,24 @@
           :selectable="selectable">
         </el-table-column>
 
-        <el-table-column type="expand">
-          <template slot-scope="props">
-            <!--<el-form label-position="left" class="demo-table-expand">-->
-              <!--<el-form-item label="当日累计分货">-->
-                <!--<span>{{ props.row.distributionnumber_t }}</span>-->
-              <!--</el-form-item>-->
-              <!--<el-form-item label="欠需求">-->
-                <!--<span>{{ props.row.littleneed }}</span>-->
-              <!--</el-form-item>-->
-            <!--</el-form>-->
-                <el-table size="mini" class="bg_red" :data="props.row.detail" border>
-                  <el-table-column align="center" label="省份" prop="province"></el-table-column>
-                  <el-table-column align="center" label="数量" prop="distributionnumber"></el-table-column>
-                  <el-table-column align="center" label="欠需求" prop="littleneed"></el-table-column>
-                  <el-table-column align="center" label="当日累计分货" prop="distributionnumber_t"></el-table-column>
-                </el-table>
-          </template>
-        </el-table-column>
+        <!--<el-table-column type="expand">-->
+          <!--<template slot-scope="props">-->
+            <!--&lt;!&ndash;<el-form label-position="left" class="demo-table-expand">&ndash;&gt;-->
+              <!--&lt;!&ndash;<el-form-item label="当日累计分货">&ndash;&gt;-->
+                <!--&lt;!&ndash;<span>{{ props.row.distributionnumber_t }}</span>&ndash;&gt;-->
+              <!--&lt;!&ndash;</el-form-item>&ndash;&gt;-->
+              <!--&lt;!&ndash;<el-form-item label="欠需求">&ndash;&gt;-->
+                <!--&lt;!&ndash;<span>{{ props.row.littleneed }}</span>&ndash;&gt;-->
+              <!--&lt;!&ndash;</el-form-item>&ndash;&gt;-->
+            <!--&lt;!&ndash;</el-form>&ndash;&gt;-->
+                <!--<el-table size="mini" class="bg_red" :data="props.row.detail" border>-->
+                  <!--<el-table-column align="center" label="省份" prop="province"></el-table-column>-->
+                  <!--<el-table-column align="center" label="数量" prop="distributionnumber"></el-table-column>-->
+                  <!--<el-table-column align="center" label="欠需求" prop="littleneed"></el-table-column>-->
+                  <!--<el-table-column align="center" label="当日累计分货" prop="distributionnumber_t"></el-table-column>-->
+                <!--</el-table>-->
+          <!--</template>-->
+        <!--</el-table-column>-->
 
         <el-table-column
           v-for="(item,i) in arr"
@@ -57,7 +57,7 @@
 
       </el-table>
       </div>
-      <div style="width: 65vw;margin: auto;padding-top: 20px;text-align: center;">
+      <div style="width: 60vw;margin: auto;padding-top: 20px;text-align: center;">
         <div class="c_p_10 c_left c_black c_size_16"> 审批建议: </div>
         <el-input
           type="textarea"
@@ -77,21 +77,19 @@
 </template>
 
 <script>
-  var jsondata = require('../../static/json/test.json')
   export default {
-    name: 'table',
+    name: 'table2',
     data () {
       return {
         url: 'http://127.0.0.1/service/OnlineApproveServlet?approve=Y',
         arr: [
           // { 'name': '物料主键', 'value': 'pk_material' },
-          { 'name': '机型', 'value': 'invName' },
-          { 'name': '分货数量','value': 'distributionnumber'},
-          { 'name': '欠需求', 'value': 'littleneed' },
-          { 'name': '当日累计分货', 'value': 'distributionnumber_t' },
-          { 'name': '分销数量', 'value': 'retailnumber' },
-          { 'name': '核心厅店数量', 'value': 'heartnumber' },
-          { 'name': '直供数量', 'value': 'bigchainnumber' },
+          { 'name': '产品经理', 'value': 'productmanager' },
+          { 'name': '省份','value': 'province'},
+          { 'name': '机型', 'value': 'materialname' },
+          { 'name': '销售渠道', 'value': 'channeltype' },
+          { 'name': '数量', 'value': 'distributionnumber' },
+          // { 'name': '核心厅店数量', 'value': 'heartnumber' },
           // { 'name': '室主任','value': 'director '},
           // { 'name': '批次号', 'value': 'bitch' },
           // { 'name': '锁定', 'value': 'islock' },
@@ -102,13 +100,13 @@
         multipleSelection:[],
         role:'',
         userid:'',
+        pk_checkflow:'',
         msg:'',
       }
     },
     mounted () {
       // this.tableData = jsondata
-      this.role = this.$route.query.role||'';
-      this.userid = this.$route.query.userid||'';
+      this.pk_checkflow = this.$route.query.pk_checkflow||'';
       console.log(this.$route);
       this.getjson();
       let arr = []
@@ -129,13 +127,11 @@
         //
         // }).then((res)=>{
         // })
-        // that.tableData = jsondata;
       },
       getjson () {
         let that = this;
-        var role = this.role;
-        var userid = this.userid;
-        this.$axios.get(that.$api.getData + '?role='+role+'&userid='+userid).then((res) => {
+        var pk_checkflow  = this.pk_checkflow;
+        this.$axios.get(that.$api.getData2 + '?pk_checkflow='+pk_checkflow).then((res) => {
           console.log(res);
           that.tableData = res.data;
         });
@@ -152,7 +148,6 @@
         }
       },
       confirmClick () {
-        let that = this;
         let arr_checked = this.multipleSelection||[];
         if(arr_checked.length<1){
           this.$message({
@@ -161,36 +156,17 @@
           });
           return;
         }
-        var enddate = this.multipleSelection[0].enddate||'';
-        console.log(enddate)
         for(let i=0,j=arr_checked.length;i<j;i++){
           arr_checked[i].islock = 'Y';
         }
+        this.uncheckClick();
+
+        let that = this;
         let msg = this.msg||'';
-        this.$axios.post(that.$api.commit + '?approve=Y&role='+this.role+'&userid='+this.userid + '&approvenote='+msg,{
-          data:JSON.stringify(arr_checked)
+        this.$axios.post(that.$api.commit2 + '?approve=Y&pk_checkflow='+this.pk_checkflow+ '&approvenote='+msg,{
+          data:JSON.stringify(arr_checked),
         }).then((res) => {
           console.log(res);
-          if(enddate && that.role==2){
-            var enddate_h = Number(enddate.split(':')[0]);
-            var enddate_m = Number(enddate.split(':')[1]);
-            var now_h = Number((new Date()).getHours());
-            var now_m = Number((new Date()).getMinutes());
-            var bool = false;
-            if(enddate_h < now_h ){
-              bool = true;
-            }else if(enddate_h == now_h ){
-              if(enddate_m < now_m){
-                bool = true;
-              }
-            }
-            if(bool) {
-              that.$message({
-                type: 'success',
-                message: '您的审批数据将于第二天发货!'
-              });
-            }
-          }
           that.tableData = res;
         })
 
@@ -208,9 +184,10 @@
         for(let i=0,j=arr_checked.length;i<j;i++){
           arr_checked[i].islock = 'Y';
         }
+        this.uncheckClick();
         let msg = this.msg||'';
-        this.$axios.post(that.$api.commit + '?approve=N&role='+this.role+'&userid='+this.userid+ '&approvenote='+msg,{
-          data:JSON.stringify(arr_checked)
+        this.$axios.post(that.$api.commit2 + '?approve=N&pk_checkflow='+this.pk_checkflow+ '&approvenote='+msg,{
+          data:JSON.stringify(arr_checked),
         }).then((res) => {
           console.log(res);
           that.tableData = res;
@@ -220,7 +197,7 @@
         this.$refs.multipleTable.toggleAllSelection();
       },
       uncheckClick () {
-        // this.$refs.multipleTable.clearSelection();
+        this.$refs.multipleTable.clearSelection();
       },
       tableRowClassName({row, rowIndex}) {
           // return 'warning-row';

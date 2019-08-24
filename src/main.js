@@ -8,13 +8,15 @@ import elementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/reset.css'
 import 'element-ui/lib/theme-chalk/index.css'
 import cookies from 'vue-cookies'
+// Vue.use(axios, vueAxios)
+Vue.use(elementUI)
+Vue.use(cookies)
 
 import aMap from 'vue-amap';
 Vue.use(aMap);
 
-// Vue.use(axios, vueAxios)
-Vue.use(elementUI)
-Vue.use(cookies)
+import vueParticles from 'vue-particles'
+Vue.use(vueParticles)
 
 import util from './assets/comm/util'
 import cset from './assets/comm/set.js'

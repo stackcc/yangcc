@@ -93,6 +93,7 @@
 .c_rela{ position: relative;}
 .c_pointer{ cursor: pointer;}
 .c_no_pointer{ pointer-events: none;}
+.c_all_pointer{ pointer-events: all;}
 .c_opacity{ opacity: 0;}
 .c_left{ text-align: left;}
 .c_center{ text-align: center;}
@@ -179,7 +180,7 @@
 
 
 /* 页面背景 */
-.c_container{
+.c_container_html{
     width: 100%;
     box-sizing: border-box;
     padding: 0;

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="c_container">
+    <div class="c_container_html">
       <div class="c_container_bg" :style="bg_attribute">
       <!--<img :src="img" class="img_bg " alt="" />-->
       </div>
@@ -14,6 +14,7 @@
           <router-view />
         </transition>
       </div>
+      <el-button class="goStack c_all_pointer c_pointer" type="info" icon="el-icon-wind-power" circle @click="goStack"></el-button>
     </div>
   </div>
 </template>
@@ -22,13 +23,17 @@
     name:'app',
     data () {
       return {
-        bg_attribute:"background-image: url('/image/9.jpg');",
+        bg_attribute:"background-image: url('image/91.jpg');",
         transitionName:'slide-bottom'
       }
     },
     methods:{
       ontouchmove(e){
         console.log(e);
+      },
+      goStack(){
+        this.$router.push('/')
+        // this.$router.push('/stack')
       }
     },
     watch:{
@@ -48,6 +53,10 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+  }
+  .c_container{
+    width: 100%;
+    min-height: 100vh;
   }
   /*页面过渡 -- left */
   .slide-left {
@@ -126,6 +135,12 @@
     background-color: #fff;
     transform: translateY(-500px) scale(1);
     z-index: 100
+  }
+  .goStack{
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99999;
   }
 
 </style>

@@ -6,6 +6,9 @@ import Index from './views/index.vue'
 import MapG from './views/map-g.vue'
 import Calendar from './views/calendar.vue'
 import Table from './views/table.vue'
+import Table2 from './views/table2.vue'
+import Css3 from './views/css3.vue'
+import Qrcode from './views/qrcode.vue'
 
 Vue.use(Router)
 
@@ -27,7 +30,8 @@ const router = new Router({
     // },
 
     // 正式数据
-    // { path: '/', name: 'table', component: Table },
+    { path: '/table', name: 'table', component: Table },
+    { path: '/table2', name: 'table2', component: Table2 },
     { path: '/', name: 'stack', component: Stack },
     { path: '/home', name: 'home', component: Home,
       children:[
@@ -41,7 +45,9 @@ const router = new Router({
       name: 'about',
       component: () => import('./views/About.vue')
     },
-    { path: '/table', name: 'table', component: Table }
+    { path: '/table', name: 'table', component: Table },
+    { path: '/css3', name: 'css3', component: Css3 },
+    { path: '/qrcode', name: 'qrcode', component: Qrcode }
 
   ],
   scrollBehavior (to, from, savedPosition) {

@@ -27,7 +27,8 @@
     "invName": "SAMSUNG-S269",
     "islock": "N",
     "littleneed": "-3",
-    "pk_material": "1001X210000000002U47"
+    "pk_material": "1001X210000000002U47",
+    "enddate": "09:30"
   },
   {
     "bitch": "20190724001",
@@ -57,6 +58,7 @@
     "invName": "lephone lephone A12(白色)",
     "islock": "N",
     "littleneed": "-152",
-    "pk_material": "1001C210000000C5Q4G7"
+    "pk_material": "1001C210000000C5Q4G7",
+    "enddate": "09:30"
   }
 ]

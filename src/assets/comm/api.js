@@ -7,6 +7,10 @@ var api = {
   // test1 -- 获取json
   getData: baseUrl + '/service/OnlineApproveServlet',
   // test1 -- 表格数据提交审核
-  commit: baseUrl + '/service/OnlineApproveServlet',
+  commit: baseUrl +  '/service/OnlineApproveServlet',
+  // test2 -- 获取json
+  getData2: baseUrl + '/service/DirectivecancelledServlet',
+  // test2 -- 表格数据提交审核
+  commit2: baseUrl +  '/service/DirectivecancelledServlet',
 }
 export default { api }
