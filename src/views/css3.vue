@@ -1,133 +1,94 @@
 <template>
   <div class="c_container c_rela">
-    <div class="cuboidBox">
-      <div class="cuboidFace frontFace">
-        <img class="mold2_img"
-             src="http://flyclient.heywoodsminiprogram.com/albumImages/matrix/detail/1/moldImg.png"
-             mode="widthFix"/>
+    <!--<div class="cuboidBox">-->
+      <!--<div class="cuboidFace frontFace">-->
+        <!--<img class="mold2_img"-->
+             <!--src="http://flyclient.heywoodsminiprogram.com/albumImages/matrix/detail/1/moldImg.png"-->
+             <!--mode="widthFix"/>-->
+      <!--</div>-->
+      <!--<div class="cuboidFace backFace"><img class="mold2_img"-->
+                                            <!--src="http://flyclient.heywoodsminiprogram.com/albumImages/matrix/detail/1/moldImg.png"-->
+                                            <!--mode="widthFix"/></div>-->
+      <!--<div class="cuboidFace leftFace"><img class="mold2_img"-->
+                                            <!--src="http://flyclient.heywoodsminiprogram.com/albumImages/matrix/detail/1/moldImg.png"-->
+                                            <!--mode="widthFix"/></div>-->
+      <!--<div class="cuboidFace rightFace"><img class="mold2_img"-->
+                                             <!--src="http://flyclient.heywoodsminiprogram.com/albumImages/matrix/detail/1/moldImg.png"-->
+                                             <!--mode="widthFix"/></div>-->
+    <!--</div>-->
+    <div class="billboard">
+      <div class="poster">
+        <div class="face panel1 p1"></div>
+        <div class="face panel2 p1"></div>
+        <div class="face panel3 p1"></div>
       </div>
-      <div class="cuboidFace backFace"><img class="mold2_img"
-                                            src="http://flyclient.heywoodsminiprogram.com/albumImages/matrix/detail/1/moldImg.png"
-                                            mode="widthFix"/></div>
-      <div class="cuboidFace leftFace"><img class="mold2_img"
-                                            src="http://flyclient.heywoodsminiprogram.com/albumImages/matrix/detail/1/moldImg.png"
-                                            mode="widthFix"/></div>
-      <div class="cuboidFace rightFace"><img class="mold2_img"
-                                             src="http://flyclient.heywoodsminiprogram.com/albumImages/matrix/detail/1/moldImg.png"
-                                             mode="widthFix"/></div>
+      <div class="poster">
+        <div class="face panel1 p2"></div>
+        <div class="face panel2 p2"></div>
+        <div class="face panel3 p2"></div>
+      </div>
+      <div class="poster">
+        <div class="face panel1 p3"></div>
+        <div class="face panel2 p3"></div>
+        <div class="face panel3 p3"></div>
+      </div>
+      <div class="poster">
+        <div class="face panel1 p4"></div>
+        <div class="face panel2 p4"></div>
+        <div class="face panel3 p4"></div>
+      </div>
+      <div class="poster">
+        <div class="face panel1 p5"></div>
+        <div class="face panel2 p5"></div>
+        <div class="face panel3 p5"></div>
+      </div>
+      <div class="poster">
+        <div class="face panel1 p6"></div>
+        <div class="face panel2 p6"></div>
+        <div class="face panel3 p6"></div>
+      </div>
+      <div class="poster">
+        <div class="face panel1 p7"></div>
+        <div class="face panel2 p7"></div>
+        <div class="face panel3 p7"></div>
+      </div>
+      <div class="poster">
+        <div class="face panel1 p8"></div>
+        <div class="face panel2 p8"></div>
+        <div class="face panel3 p8"></div>
+      </div>
+      <div class="poster">
+        <div class="face panel1 p9"></div>
+        <div class="face panel2 p9"></div>
+        <div class="face panel3 p9"></div>
+      </div>
+      <div class="poster">
+        <div class="face panel1 p10"></div>
+        <div class="face panel2 p10"></div>
+        <div class="face panel3 p10"></div>
+      </div>
     </div>
 
   </div>
 </template>
 <script>
-  export default {
-    name: 'stack',
-    components: {},
-    data () {
-      return {
-        val: '',
-        urlObj: {},
+export default {
+  name: 'stack',
+  components: {},
+  data () {
+    return {
+      val: '',
+      urlObj: {}
 
-      }
-    },
-    mounted () {
-      this.$util.log()
-    },
-    computed: {},
-    methods: {
-      querySearch (queryString, cb) {
-        var restaurants = this.loadAll()
-        var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : this.loadAll()
-        clearTimeout(this.timeout)
-        this.timeout = setTimeout(() => {
-          cb(results)
-        }, 2000 * Math.random())
-      },
-      createStateFilter (queryString) {
-        return (state) => {
-          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
-        }
-      },
-      loadAll () {
-        return [
-          // { "value": "css", "url": "./css3" },
-          { 'value': '地图', 'url': './mapg' },
-          { 'value': '日历', 'url': './calendar' },
-        ]
-      },
-      handleSelect (item) {
-        this.urlObj = item
-      },
-      toUrl () {
-        if (this.urlObj && this.urlObj.url) {
-          this.$router.push(this.urlObj.url)
-        }
-      },
     }
-  }
+  },
+  mounted () {
+    this.$util.log()
+  },
+  computed: {},
+  methods: {}
+}
 </script>
-<style type="text/css"  scoped>
-  .cuboidBox {
-    width: 100%;
-    height: 86%;
-    position: absolute;
-    transform: translate3d(0, -1000px, 0);
-    transform-style: preserve-3d;
-    animation: cuboidInDown 2s 2s linear forwards, rotateCuboid 12s 4s linear forwards infinite;
-  }
-  .cuboidFace {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 5;
-    width: 600px;
-    height: 100%;
+<style lang="sass" rel="stylesheet/sass" scoped>
 
-  }
-  .mold2_img {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-  .frontFace {
-    transform: translateZ(300px);
-  }
-
-  .backFace {
-    transform: rotateX(0deg) translateZ(-300px) scale(-1, 1);
-  }
-
-  .leftFace {
-    transform: rotateY(-90deg) translateZ(300px);
-  }
-
-  .rightFace {
-    transform: rotateY(90deg) translateZ(300px);
-  }
-
-  @keyframes cuboidInDown {
-    0% {
-      top: 10%;
-      transform: translate3d(0, -1000px, 0) rotateY(30deg) scale(.6);
-    }
-    100% {
-      top: 10%;
-      transform: translate3d(0, 0, 0) rotateY(0deg) scale(.6);
-    }
-  }
-
-  @keyframes rotateCuboid {
-    0% {
-      top: 10%;
-      transform: rotateX(6deg) rotateY(0deg) scale(.6);
-    }
-    50% {
-      top: 10%;
-      transform: rotateX(6deg) rotateY(180deg) scale(1);
-    }
-    100% {
-      top: 10%;
-      transform: rotateX(6deg) rotateY(360deg) scale(.6);
-    }
-  }
 </style>

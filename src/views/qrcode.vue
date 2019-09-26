@@ -20,41 +20,41 @@
   </div>
 </template>
 <script>
-  import QRCode from 'qrcode'
-  export default {
-    name: 'qrcode',
-    components: {},
-    data () {
-      return {
-        message:'',
+import QRCode from 'qrcode'
+export default {
+  name: 'qrcode',
+  components: {},
+  data () {
+    return {
+      message: ''
 
-      }
-    },
-    mounted () {
-      var message = this.$route.query.url;
-      if(message){
-        this.message = message;
-      }
-      this.$util.log(message);
-    },
-    computed: {},
-    methods: {
-      toGenerate(){
-        var val = this.message;
-        var msg= document.getElementById('msg');
-        // 将获取到的数据（val）画到msg（canvas）上
-        QRCode.toCanvas(msg, val, function (error) {
-          console.log(error)
-        })
-      },
-    },
-    watch:{
-      // 通过监听获取数据
-      message(val){
-        this.toGenerate();
-      },
-    },
+    }
+  },
+  mounted () {
+    var message = this.$route.query.url
+    if (message) {
+      this.message = message
+    }
+    this.$util.log(message)
+  },
+  computed: {},
+  methods: {
+    toGenerate () {
+      var val = this.message
+      var msg = document.getElementById('msg')
+      // 将获取到的数据（val）画到msg（canvas）上
+      QRCode.toCanvas(msg, val, function (error) {
+        console.log(error)
+      })
+    }
+  },
+  watch: {
+    // 通过监听获取数据
+    message (val) {
+      this.toGenerate()
+    }
   }
+}
 </script>
 <style type="text/css"  scoped>
   #msg{

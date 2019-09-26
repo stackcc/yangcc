@@ -8,43 +8,43 @@
   </div>
 </template>
 <script>
-  export default {
-    name:'index',
-    components:{
+export default {
+  name: 'index',
+  components: {
 
-    },
-    data(){
-      return {
-        bg_attribute:"background-image: url('/static/9.jpg');",
-        icon:'el-icon-lock',
-        lock:false,
-      }
-    },
-    mounted(){
-      this.lock = this.$store.state.auth.index.lock;
-    },
-    methods:{
-      ontouchstart:function (e) {
-        console.log(e)
-      },
-      ontouchmove:function (e) {
-        console.log(e)
-      },
-      onIconClick(){
-        this.icon = 'el-icon-unlock';
-        this.lock = false;
-        this.$store.state.auth.index.lock = false;
-        this.$store.state.auth.home.viewShow = true;
-      }
-    },
-    computed:{
-      imgUrl(){
-      },
-    },
-    watch:{
-
+  },
+  data () {
+    return {
+      bg_attribute: "background-image: url('/static/9.jpg');",
+      icon: 'el-icon-lock',
+      lock: false
     }
+  },
+  mounted () {
+    this.lock = this.$store.state.auth.index.lock
+  },
+  methods: {
+    ontouchstart: function (e) {
+      console.log(e)
+    },
+    ontouchmove: function (e) {
+      console.log(e)
+    },
+    onIconClick () {
+      this.icon = 'el-icon-unlock'
+      this.lock = false
+      this.$store.state.auth.index.lock = false
+      this.$store.state.auth.home.viewShow = true
+    }
+  },
+  computed: {
+    imgUrl () {
+    }
+  },
+  watch: {
+
   }
+}
 </script>
 <style scope>
   .start{

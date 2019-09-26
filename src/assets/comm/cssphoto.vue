@@ -10,561 +10,485 @@
 </template>
 
 <script>
-  export default {
-    name: '',
-    methods:{
-      start(){
-        var m3D = function () {
+export default {
+  name: '',
+  methods: {
+    start () {
+      var m3D = (function () {
+        /* ---- private vars ---- */
 
-          /* ---- private vars ---- */
+        var diapo = []
 
-          var diapo = [],
+        var imb
 
-            imb,
+        var scr
 
-            scr,
+        var bar
 
-            bar,
+        var selected
 
-            selected,
+        var urlInfo
 
-            urlInfo,
+        var imagesPath = 'images/'
 
-            imagesPath = "images/",
+        var camera = { x: 0, y: 0, z: -650, s: 0, fov: 500 }
 
-            camera = {x:0, y:0, z:-650, s:0, fov: 500},
+        var nw = 0
 
-            nw = 0,
+        var nh = 0
 
-            nh = 0;
+        /* ==== camera tween methods ==== */
 
-          /* ==== camera tween methods ==== */
+        camera.setTarget = function (c0, t1, p) {
+          if (Math.abs(t1 - c0) > 0.1) {
+            camera.s = 1
 
-          camera.setTarget = function (c0, t1, p) {
+            camera.p = 0
 
-            if (Math.abs(t1 - c0) > .1) {
+            camera.d = t1 - c0
 
-              camera.s = 1;
+            if (p) {
+              camera.d *= 2
 
-              camera.p = 0;
-
-              camera.d = t1 - c0;
-
-              if (p) {
-
-                camera.d *= 2;
-
-                camera.p = 9;
-
-              }
-
+              camera.p = 9
             }
+          }
+        }
 
+        camera.tween = function (v) {
+          if (camera.s != 0) {
+            camera.p += camera.s
+
+            camera[v] += camera.d * camera.p * 0.01
+
+            if (camera.p == 10) camera.s = -1
+
+            else if (camera.p == 0) camera.s = 0
           }
 
-          camera.tween = function (v) {
+          return camera.s
+        }
 
-            if (camera.s != 0) {
+        /* ==== diapo constructor ==== */
 
-              camera.p += camera.s;
+        var Diapo = function (n, img, x, y, z) {
+          if (img) {
+            this.url = img.url
 
-              camera[v] += camera.d * camera.p * .01;
+            this.title = img.title
 
-              if (camera.p == 10) camera.s = -1;
+            this.color = img.color
 
-              else if (camera.p == 0) camera.s = 0;
+            this.isLoaded = false
 
+            if (document.createElement('canvas').getContext) {
+              /* ---- using canvas in place of images (performance trick) ---- */
+
+              this.srcImg = new Image()
+
+              this.srcImg.src = imagesPath + img.src
+
+              this.img = document.createElement('canvas')
+
+              this.canvas = true
+
+              scr.appendChild(this.img)
+            } else {
+              /* ---- normal image ---- */
+
+              this.img = document.createElement('img')
+
+              this.img.src = imagesPath + img.src
+
+              scr.appendChild(this.img)
             }
 
-            return camera.s;
+            /* ---- on click event ---- */
 
-          }
+            this.img.onclick = function () {
+              if (camera.s) return
 
-          /* ==== diapo constructor ==== */
+              if (this.diapo.isLoaded) {
+                if (this.diapo.urlActive) {
+                  /* ---- jump hyperlink ---- */
 
-          var Diapo = function (n, img, x, y, z) {
+                  top.location.href = this.diapo.url
+                } else {
+                  /* ---- target positions ---- */
 
-            if (img) {
+                  camera.tz = this.diapo.z - camera.fov
 
-              this.url = img.url;
+                  camera.tx = this.diapo.x
 
-              this.title = img.title;
+                  camera.ty = this.diapo.y
 
-              this.color = img.color;
+                  /* ---- disable previously selected img ---- */
 
-              this.isLoaded = false;
+                  if (selected) {
+                    selected.but.className = 'button viewed'
 
-              if (document.createElement("canvas").getContext) {
+                    selected.img.className = ''
 
-                /* ---- using canvas in place of images (performance trick) ---- */
+                    selected.img.style.cursor = 'pointer'
 
-                this.srcImg = new Image();
+                    selected.urlActive = false
 
-                this.srcImg.src = imagesPath + img.src;
-
-                this.img = document.createElement("canvas");
-
-                this.canvas = true;
-
-                scr.appendChild(this.img);
-
-              } else {
-
-                /* ---- normal image ---- */
-
-                this.img = document.createElement('img');
-
-                this.img.src = imagesPath + img.src;
-
-                scr.appendChild(this.img);
-
-              }
-
-              /* ---- on click event ---- */
-
-              this.img.onclick = function () {
-
-                if (camera.s) return;
-
-                if (this.diapo.isLoaded) {
-
-                  if (this.diapo.urlActive) {
-
-                    /* ---- jump hyperlink ---- */
-
-                    top.location.href = this.diapo.url;
-
-                  } else {
-
-                    /* ---- target positions ---- */
-
-                    camera.tz = this.diapo.z - camera.fov;
-
-                    camera.tx = this.diapo.x;
-
-                    camera.ty = this.diapo.y;
-
-                    /* ---- disable previously selected img ---- */
-
-                    if (selected) {
-
-                      selected.but.className = "button viewed";
-
-                      selected.img.className = "";
-
-                      selected.img.style.cursor = "pointer";
-
-                      selected.urlActive = false;
-
-                      urlInfo.style.visibility = "hidden";
-
-                    }
-
-                    /* ---- select current img ---- */
-
-                    this.diapo.but.className = "button selected";
-
-                    interpolation(false);
-
-                    selected = this.diapo;
-
+                    urlInfo.style.visibility = 'hidden'
                   }
 
+                  /* ---- select current img ---- */
+
+                  this.diapo.but.className = 'button selected'
+
+                  interpolation(false)
+
+                  selected = this.diapo
                 }
-
               }
-
-              /* ---- command bar buttons ---- */
-
-              this.but = document.createElement('div');
-
-              this.but.className = "button";
-
-              bar.appendChild(this.but);
-
-              this.but.diapo = this;
-
-              this.but.style.left = Math.round((this.but.offsetWidth  * 1.2) * (n % 4)) + 'px';
-
-              this.but.style.top  = Math.round((this.but.offsetHeight * 1.2) * Math.floor(n / 4)) + 'px';
-
-              this.but.onclick = this.img.onclick;
-
-              imb = this.img;
-
-              this.img.diapo = this;
-
-              this.zi = 25000;
-
-            } else {
-
-              /* ---- transparent div ---- */
-
-              this.img = document.createElement('div');
-
-              this.isLoaded = true;
-
-              this.img.className = "fog";
-
-              scr.appendChild(this.img);
-
-              this.w = 300;
-
-              this.h = 300;
-
-              this.zi = 15000;
-
             }
 
-            /* ---- object variables ---- */
+            /* ---- command bar buttons ---- */
 
-            this.x = x;
+            this.but = document.createElement('div')
 
-            this.y = y;
+            this.but.className = 'button'
 
-            this.z = z;
+            bar.appendChild(this.but)
 
-            this.css = this.img.style;
+            this.but.diapo = this
 
+            this.but.style.left = Math.round((this.but.offsetWidth * 1.2) * (n % 4)) + 'px'
+
+            this.but.style.top = Math.round((this.but.offsetHeight * 1.2) * Math.floor(n / 4)) + 'px'
+
+            this.but.onclick = this.img.onclick
+
+            imb = this.img
+
+            this.img.diapo = this
+
+            this.zi = 25000
+          } else {
+            /* ---- transparent div ---- */
+
+            this.img = document.createElement('div')
+
+            this.isLoaded = true
+
+            this.img.className = 'fog'
+
+            scr.appendChild(this.img)
+
+            this.w = 300
+
+            this.h = 300
+
+            this.zi = 15000
           }
 
-          /* ==== main 3D animation ==== */
+          /* ---- object variables ---- */
 
-          Diapo.prototype.anim = function () {
+          this.x = x
 
-            if (this.isLoaded) {
+          this.y = y
 
-              /* ---- 3D to 2D projection ---- */
+          this.z = z
 
-              var x = this.x - camera.x;
+          this.css = this.img.style
+        }
 
-              var y = this.y - camera.y;
+        /* ==== main 3D animation ==== */
 
-              var z = this.z - camera.z;
+        Diapo.prototype.anim = function () {
+          if (this.isLoaded) {
+            /* ---- 3D to 2D projection ---- */
 
-              if (z < 20) z += 5000;
+            var x = this.x - camera.x
 
-              var p = camera.fov / z;
+            var y = this.y - camera.y
 
-              var w = this.w * p;
+            var z = this.z - camera.z
 
-              var h = this.h * p;
+            if (z < 20) z += 5000
 
-              /* ---- HTML rendering ---- */
+            var p = camera.fov / z
 
-              this.css.left   = Math.round(nw + x * p - w * .5) + 'px';
+            var w = this.w * p
 
-              this.css.top    = Math.round(nh + y * p - h * .5) + 'px';
+            var h = this.h * p
 
-              this.css.width  = Math.round(w) + 'px';
+            /* ---- HTML rendering ---- */
 
-              this.css.height = Math.round(h) + 'px';
+            this.css.left = Math.round(nw + x * p - w * 0.5) + 'px'
 
-              this.css.zIndex = this.zi - Math.round(z);
+            this.css.top = Math.round(nh + y * p - h * 0.5) + 'px'
 
+            this.css.width = Math.round(w) + 'px'
+
+            this.css.height = Math.round(h) + 'px'
+
+            this.css.zIndex = this.zi - Math.round(z)
+          } else {
+            /* ---- image is loaded? ---- */
+
+            this.isLoaded = this.loading()
+          }
+        }
+
+        /* ==== onload initialization ==== */
+
+        Diapo.prototype.loading = function () {
+          if ((this.canvas && this.srcImg.complete) || this.img.complete) {
+            if (this.canvas) {
+              /* ---- canvas version ---- */
+
+              this.w = this.srcImg.width
+
+              this.h = this.srcImg.height
+
+              this.img.width = this.w
+
+              this.img.height = this.h
+
+              var context = this.img.getContext('2d')
+
+              context.drawImage(this.srcImg, 0, 0, this.w, this.h)
             } else {
+              /* ---- plain image version ---- */
 
-              /* ---- image is loaded? ---- */
+              this.w = this.img.width
 
-              this.isLoaded = this.loading();
-
+              this.h = this.img.height
             }
 
+            /* ---- button loaded ---- */
+
+            this.but.className += ' loaded'
+
+            return true
           }
 
-          /* ==== onload initialization ==== */
+          return false
+        }
 
-          Diapo.prototype.loading = function () {
+        /// /////////////////////////////////////////////////////////////////////////
 
-            if ((this.canvas && this.srcImg.complete) || this.img.complete) {
+        /* ==== screen dimensions ==== */
 
-              if (this.canvas) {
+        var resize = function () {
+          nw = scr.offsetWidth * 0.5
 
-                /* ---- canvas version ---- */
+          nh = scr.offsetHeight * 0.5
+        }
 
-                this.w = this.srcImg.width;
+        /* ==== disable interpolation during animation ==== */
 
-                this.h = this.srcImg.height;
+        var interpolation = function (bicubic) {
+          var i = 0; var o
 
-                this.img.width = this.w;
+          while (o = diapo[i++]) {
+            if (o.but) {
+              o.css.msInterpolationMode = bicubic ? 'bicubic' : 'nearest-neighbor' // makes IE8 happy
 
-                this.img.height = this.h;
+              o.css.imageRendering = bicubic ? 'optimizeQuality' : 'optimizeSpeed' // does not really work...
+            }
+          }
+        }
 
-                var context = this.img.getContext("2d");
+        /* ==== init script ==== */
 
-                context.drawImage(this.srcImg, 0, 0, this.w, this.h);
+        var init = function (data) {
+          /* ---- containers ---- */
 
+          scr = document.getElementById('screen')
+
+          bar = document.getElementById('bar')
+
+          urlInfo = document.getElementById('urlInfo')
+
+          resize()
+
+          /* ---- loading images ---- */
+
+          var i = 0
+
+          var o
+
+          var n = data.length
+
+          while (o = data[i++]) {
+            /* ---- images ---- */
+
+            var x = 1000 * ((i % 4) - 1.5)
+
+            var y = Math.round(Math.random() * 4000) - 2000
+
+            var z = i * (5000 / n)
+
+            diapo.push(new Diapo(i - 1, o, x, y, z))
+
+            /* ---- transparent frames ---- */
+
+            var k = diapo.length - 1
+
+            for (var j = 0; j < 3; j++) {
+              var x = Math.round(Math.random() * 4000) - 2000
+
+              var y = Math.round(Math.random() * 4000) - 2000
+
+              diapo.push(new Diapo(k, null, x, y, z + 100))
+            }
+          }
+
+          /* ---- start engine ---- */
+
+          run()
+        }
+
+        /// /////////////////////////////////////////////////////////////////////////
+
+        /* ==== main loop ==== */
+
+        var run = function () {
+          /* ---- x axis move ---- */
+
+          if (camera.tx) {
+            if (!camera.s) camera.setTarget(camera.x, camera.tx)
+
+            var m = camera.tween('x')
+
+            if (!m) camera.tx = 0
+
+            /* ---- y axis move ---- */
+          } else if (camera.ty) {
+            if (!camera.s) camera.setTarget(camera.y, camera.ty)
+
+            var m = camera.tween('y')
+
+            if (!m) camera.ty = 0
+
+            /* ---- z axis move ---- */
+          } else if (camera.tz) {
+            if (!camera.s) camera.setTarget(camera.z, camera.tz)
+
+            var m = camera.tween('z')
+
+            if (!m) {
+              /* ---- animation end ---- */
+
+              camera.tz = 0
+
+              interpolation(true)
+
+              /* ---- activate hyperlink ---- */
+
+              if (selected.url) {
+                selected.img.style.cursor = 'pointer'
+
+                selected.urlActive = true
+
+                selected.img.className = 'href'
+
+                urlInfo.diapo = selected
+
+                urlInfo.onclick = selected.img.onclick
+
+                urlInfo.innerHTML = selected.title || selected.url
+
+                urlInfo.style.visibility = 'visible'
+
+                urlInfo.style.color = selected.color || '#fff'
+
+                urlInfo.style.top = Math.round(selected.img.offsetTop + selected.img.offsetHeight - urlInfo.offsetHeight - 5) + 'px'
+
+                urlInfo.style.left = Math.round(selected.img.offsetLeft + selected.img.offsetWidth - urlInfo.offsetWidth - 5) + 'px'
               } else {
-
-                /* ---- plain image version ---- */
-
-                this.w = this.img.width;
-
-                this.h = this.img.height;
-
+                selected.img.style.cursor = 'default'
               }
-
-              /* ---- button loaded ---- */
-
-              this.but.className += " loaded";
-
-              return true;
-
             }
-
-            return false;
-
           }
 
-          ////////////////////////////////////////////////////////////////////////////
+          /* ---- anim images ---- */
 
-          /* ==== screen dimensions ==== */
+          var i = 0; var o
 
-          var resize = function () {
+          while (o = diapo[i++]) o.anim()
 
-            nw = scr.offsetWidth * .5;
+          /* ---- loop ---- */
 
-            nh = scr.offsetHeight * .5;
+          setTimeout(run, 32)
+        }
 
-          }
+        return {
 
-          /* ==== disable interpolation during animation ==== */
+          /// /////////////////////////////////////////////////////////////////////////
 
-          var interpolation = function (bicubic) {
+          /* ==== initialize script ==== */
 
-            var i = 0, o;
+          init: init
 
-            while( o = diapo[i++] ) {
+        }
+      }())
+      setTimeout(function () {
+        m3D.init(
 
-              if (o.but) {
+          [
 
-                o.css.msInterpolationMode = bicubic ? 'bicubic' : 'nearest-neighbor'; // makes IE8 happy
+            { src: '46eae50db6.jpg', url: 'http://www.jq22.com', title: 'jump to random script', color: '#fff' },
 
-                o.css.imageRendering = bicubic ? 'optimizeQuality' : 'optimizeSpeed'; // does not really work...
+            { src: '661a66329a.jpg' },
 
-              }
+            { src: 'a8008ae7f7.jpg' },
 
-            }
+            { src: '69833ed09a.jpg' },
 
-          }
+            { src: 'fe00425d0a.jpg' },
 
-          /* ==== init script ==== */
+            { src: 'b05b0c6962.jpg' },
 
-          var init = function (data) {
+            { src: '6a884d6ef2.jpg' },
 
-            /* ---- containers ---- */
+            { src: 'ed57bce8c4.jpg' },
 
-            scr = document.getElementById("screen");
+            { src: '94da4fb185.jpg' },
 
-            bar = document.getElementById("bar");
+            { src: 'd04505fe96.jpg' },
 
-            urlInfo = document.getElementById("urlInfo");
+            { src: '774573728f.jpg' },
 
-            resize();
+            { src: 'b05c9edc7f.jpg' },
 
-            /* ---- loading images ---- */
+            { src: '8fe86226ff.jpg' },
 
-            var i = 0,
+            { src: '7b4cc906b3.jpg' },
 
-              o,
+            { src: 'f22e53da3a.jpg' },
 
-              n = data.length;
+            { src: 'c136720da3.jpg' },
 
-            while( o = data[i++] ) {
+            { src: 'd57dc05c81.jpg' },
 
-              /* ---- images ---- */
+            { src: '65f8787807.jpg' },
 
-              var x = 1000 * ((i % 4) - 1.5);
+            { src: '200ff06c0e.jpg' },
 
-              var y = Math.round(Math.random() * 4000) - 2000;
+            { src: '5b0b0c8119.jpg' },
 
-              var z = i * (5000 / n);
+            { src: '0e85d4fe6d.jpg' },
 
-              diapo.push( new Diapo(i - 1, o, x, y, z));
+            { src: '1ef7ea6559.jpg' },
 
-              /* ---- transparent frames ---- */
+            { src: 'ed37a0925e.jpg' },
 
-              var k = diapo.length - 1;
+            { src: '73d310387e.jpg', url: 'http://www.jq22.com', color: '#fff' }
 
-              for (var j = 0; j < 3; j++) {
+          ]
 
-                var x = Math.round(Math.random() * 4000) - 2000;
-
-                var y = Math.round(Math.random() * 4000) - 2000;
-
-                diapo.push( new Diapo(k, null, x, y, z + 100));
-
-              }
-
-            }
-
-            /* ---- start engine ---- */
-
-            run();
-
-          }
-
-          ////////////////////////////////////////////////////////////////////////////
-
-          /* ==== main loop ==== */
-
-          var run = function () {
-
-            /* ---- x axis move ---- */
-
-            if (camera.tx) {
-
-              if (!camera.s) camera.setTarget(camera.x, camera.tx);
-
-              var m = camera.tween('x');
-
-              if (!m) camera.tx = 0;
-
-              /* ---- y axis move ---- */
-
-            } else if (camera.ty) {
-
-              if (!camera.s) camera.setTarget(camera.y, camera.ty);
-
-              var m = camera.tween('y');
-
-              if (!m) camera.ty = 0;
-
-              /* ---- z axis move ---- */
-
-            } else if (camera.tz) {
-
-              if (!camera.s) camera.setTarget(camera.z, camera.tz);
-
-              var m = camera.tween('z');
-
-              if (!m) {
-
-                /* ---- animation end ---- */
-
-                camera.tz = 0;
-
-                interpolation(true);
-
-                /* ---- activate hyperlink ---- */
-
-                if (selected.url) {
-
-                  selected.img.style.cursor = "pointer";
-
-                  selected.urlActive = true;
-
-                  selected.img.className = "href";
-
-                  urlInfo.diapo = selected;
-
-                  urlInfo.onclick = selected.img.onclick;
-
-                  urlInfo.innerHTML = selected.title || selected.url;
-
-                  urlInfo.style.visibility = "visible";
-
-                  urlInfo.style.color = selected.color || "#fff";
-
-                  urlInfo.style.top = Math.round(selected.img.offsetTop + selected.img.offsetHeight - urlInfo.offsetHeight - 5) + "px";
-
-                  urlInfo.style.left = Math.round(selected.img.offsetLeft + selected.img.offsetWidth - urlInfo.offsetWidth - 5) + "px";
-
-                } else {
-
-                  selected.img.style.cursor = "default";
-
-                }
-
-              }
-
-            }
-
-            /* ---- anim images ---- */
-
-            var i = 0, o;
-
-            while( o = diapo[i++] ) o.anim();
-
-            /* ---- loop ---- */
-
-            setTimeout(run, 32);
-
-          }
-
-          return {
-
-            ////////////////////////////////////////////////////////////////////////////
-
-            /* ==== initialize script ==== */
-
-            init : init
-
-          }
-
-        }();
-        setTimeout(function() {
-
-          m3D.init(
-
-            [
-
-              { src: '46eae50db6.jpg', url: 'http://www.jq22.com', title: 'jump to random script', color: '#fff' },
-
-              { src: '661a66329a.jpg' },
-
-              { src: 'a8008ae7f7.jpg' },
-
-              { src: '69833ed09a.jpg' },
-
-              { src: 'fe00425d0a.jpg' },
-
-              { src: 'b05b0c6962.jpg' },
-
-              { src: '6a884d6ef2.jpg' },
-
-              { src: 'ed57bce8c4.jpg' },
-
-              { src: '94da4fb185.jpg' },
-
-              { src: 'd04505fe96.jpg' },
-
-              { src: '774573728f.jpg' },
-
-              { src: 'b05c9edc7f.jpg' },
-
-              { src: '8fe86226ff.jpg' },
-
-              { src: '7b4cc906b3.jpg' },
-
-              { src: 'f22e53da3a.jpg' },
-
-              { src: 'c136720da3.jpg' },
-
-              { src: 'd57dc05c81.jpg' },
-
-              { src: '65f8787807.jpg' },
-
-              { src: '200ff06c0e.jpg' },
-
-              { src: '5b0b0c8119.jpg' },
-
-              { src: '0e85d4fe6d.jpg' },
-
-              { src: '1ef7ea6559.jpg' },
-
-              { src: 'ed37a0925e.jpg' },
-
-              { src: '73d310387e.jpg', url: 'http://www.jq22.com', color: '#fff' }
-
-            ]
-
-          );
-
-        }, 500);
-      }
+        )
+      }, 500)
     }
   }
+}
 </script>
 
 <style scoped>
@@ -619,8 +543,6 @@
     cursor: pointer;
 
     image-rendering: optimizeSpeed;
-
-
 
   }
 

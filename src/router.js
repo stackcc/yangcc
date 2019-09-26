@@ -9,6 +9,10 @@ import Table from './views/table.vue'
 import Table2 from './views/table2.vue'
 import Css3 from './views/css3.vue'
 import Qrcode from './views/qrcode.vue'
+import Theway from './views/theway.vue'
+import Way from './views/way.vue'
+import WayDetail from './views/wayDetail.vue'
+import Lotto from './views/lotto.vue'
 
 Vue.use(Router)
 
@@ -30,14 +34,16 @@ const router = new Router({
     // },
 
     // 正式数据
-    { path: '/table', name: 'table', component: Table },
+    { path: '/table1', name: 'table', component: Table },
     { path: '/table2', name: 'table2', component: Table2 },
     { path: '/', name: 'stack', component: Stack },
-    { path: '/home', name: 'home', component: Home,
-      children:[
-          { path: '/', name: 'index', component: Index },
-          { path: '/mapg', name: 'mapg', component: MapG },
-          { path: '/calendar', name: 'calendar', component: Calendar }
+    { path: '/home',
+      name: 'home',
+      component: Home,
+      children: [
+        { path: '/', name: 'index', component: Index },
+        { path: '/mapg', name: 'mapg', component: MapG },
+        { path: '/calendar', name: 'calendar', component: Calendar }
       ]
     },
     {
@@ -47,7 +53,11 @@ const router = new Router({
     },
     { path: '/table', name: 'table', component: Table },
     { path: '/css3', name: 'css3', component: Css3 },
-    { path: '/qrcode', name: 'qrcode', component: Qrcode }
+    { path: '/qrcode', name: 'qrcode', component: Qrcode },
+    { path: '/theway', name: 'theway', component: Theway },
+    { path: '/way', name: 'way', component: Way },
+    { path: '/waydetail', name: 'waydetail', component: WayDetail },
+    { path: '/lotto', name: 'lotto', component: Lotto },
 
   ],
   scrollBehavior (to, from, savedPosition) {

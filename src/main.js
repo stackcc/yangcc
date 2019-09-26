@@ -1,35 +1,49 @@
+import '@babel/polyfill'
 import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import router from './router'
 import axios from 'axios'
 // import vueAxios from 'vue-axios'
+
+// element 配置
 import elementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/reset.css'
 import 'element-ui/lib/theme-chalk/index.css'
-import cookies from 'vue-cookies'
-// Vue.use(axios, vueAxios)
 Vue.use(elementUI)
+
+// cookie 配置
+import cookies from 'vue-cookies'
 Vue.use(cookies)
 
-import aMap from 'vue-amap';
-Vue.use(aMap);
+// 插件地图配置
+import aMap from 'vue-amap'
+Vue.use(aMap)
 
+// 插件 粒子配置
 import vueParticles from 'vue-particles'
 Vue.use(vueParticles)
 
-import util from './assets/comm/util'
-import cset from './assets/comm/set.js'
+//markdown 配置
+import 'mavon-editor/dist/css/index.css'
+import mavonEditor from 'mavon-editor'
+import highlight from './assets/comm/highlight'; // from 路径是highlight.js的路径，纯属自定义
+Vue.use(highlight);
+Vue.use(mavonEditor)
+
+// import vueHighlightJS from 'vue-highlightjs'
+// import 'highlight.js/styles/atom-one-dark.css'
+// Vue.use(vueHighlightJS)
+
+// 自定义配置
+import { util,api,ajax,setup } from './assets/comm/comm'
 // import axiox from './assets/comm/axios'
-// import ajax from './assets/comm/ajax'
-import api from './assets/comm/api'
-
+// Vue.use(axios, vueAxios)
 Vue.prototype.$axios = axios
-Vue.prototype.$util = util.util
-Vue.prototype.$cset = cset.set
-Vue.prototype.$api = api.api
-// Vue.prototype.$ajax = ajax.ajax
-
+Vue.prototype.$setup = setup
+Vue.prototype.$api = api
+Vue.prototype.$util = util
+Vue.prototype.$ajax = ajax
 
 Vue.config.productionTip = false
 
@@ -38,11 +52,10 @@ aMap.initAMapApiLoader({
   key: '5d20f670d207ac0bf8868daf78d9da8f',
   plugin: ['AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType'],
   v: '1.4.4'
-});
+})
 
 new Vue({
   store,
   router,
   render: h => h(App)
 }).$mount('#app')
-

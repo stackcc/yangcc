@@ -6,18 +6,22 @@
   </div>
 </template>
 <script>
-  export default {
-    name:'about',
-    components:{
+export default {
+  name: 'about',
+  components: {
 
-    },
-    data(){
-      return {
-      }
-    },
-    computed:{
+  },
+  data () {
+    return {
     }
+  },
+  computed: {
+
+  },
+  mounted:function () {
+
   }
+}
 </script>
 <style>
 

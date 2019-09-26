@@ -19,32 +19,37 @@
   </div>
 </template>
 <script>
-  export default {
-    name:'app',
-    data () {
-      return {
-        bg_attribute:"background-image: url('image/91.jpg');",
-        transitionName:'slide-bottom'
-      }
-    },
-    methods:{
-      ontouchmove(e){
-        console.log(e);
-      },
-      goStack(){
-        this.$router.push('/')
-        // this.$router.push('/stack')
-      }
-    },
-    watch:{
-      $route(a,b){
-        console.log(a,b)
-      }
-    },
-    beforeRouteUpdate (to, from, next) {
-      console.log(to,from)
+export default {
+  name: 'app',
+  data () {
+    return {
+      bg_attribute: '',
+      transitionName: 'slide-bottom'
     }
+  },
+  mounted () {
+    if (this.$setup.app.bg) {
+      this.bg_attribute = 'background-image: url(' + this.$setup.app.bg + ');'
+    }
+  },
+  methods: {
+    ontouchmove (e) {
+      console.log(e)
+    },
+    goStack () {
+      this.$router.push('/')
+      // this.$router.push('/stack')
+    }
+  },
+  watch: {
+    $route (a, b) {
+      console.log(a, b)
+    }
+  },
+  beforeRouteUpdate (to, from, next) {
+    console.log(to, from)
   }
+}
 </script>
 <style>
   @import "./assets/comm/comm.css";

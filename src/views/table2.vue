@@ -77,137 +77,143 @@
 </template>
 
 <script>
-  export default {
-    name: 'table2',
-    data () {
-      return {
-        url: 'http://127.0.0.1/service/OnlineApproveServlet?approve=Y',
-        arr: [
-          // { 'name': '物料主键', 'value': 'pk_material' },
-          { 'name': '产品经理', 'value': 'productmanager' },
-          { 'name': '省份','value': 'province'},
-          { 'name': '机型', 'value': 'materialname' },
-          { 'name': '销售渠道', 'value': 'channeltype' },
-          { 'name': '数量', 'value': 'distributionnumber' },
-          // { 'name': '核心厅店数量', 'value': 'heartnumber' },
-          // { 'name': '室主任','value': 'director '},
-          // { 'name': '批次号', 'value': 'bitch' },
-          // { 'name': '锁定', 'value': 'islock' },
-          // { 'name': '省份', 'value': 'province'},
-          // { 'name': '数量', 'value': 'number' }
-          ],
-        tableData: [],
-        multipleSelection:[],
-        role:'',
-        userid:'',
-        pk_checkflow:'',
-        msg:'',
+export default {
+  name: 'table2',
+  data () {
+    return {
+      url: 'http://127.0.0.1/service/OnlineApproveServlet?approve=Y',
+      arr: [
+        // { 'name': '物料主键', 'value': 'pk_material' },
+        { 'name': '产品经理', 'value': 'productmanager' },
+        { 'name': '省份', 'value': 'province' },
+        { 'name': '机型', 'value': 'materialname' },
+        { 'name': '销售渠道', 'value': 'channeltype' },
+        { 'name': '数量', 'value': 'distributionnumber' }
+        // { 'name': '核心厅店数量', 'value': 'heartnumber' },
+        // { 'name': '室主任','value': 'director '},
+        // { 'name': '批次号', 'value': 'bitch' },
+        // { 'name': '锁定', 'value': 'islock' },
+        // { 'name': '省份', 'value': 'province'},
+        // { 'name': '数量', 'value': 'number' }
+      ],
+      tableData: [],
+      multipleSelection: [],
+      role: '',
+      userid: '',
+      pk_checkflow: '',
+      msg: ''
+    }
+  },
+  mounted () {
+    // this.tableData = jsondata
+    this.pk_checkflow = this.$route.query.pk_checkflow || ''
+    console.log(this.$route)
+    this.getjson()
+    let arr = []
+    for (var key in this.obj) {
+      let obj = {}
+      obj.name = ''
+      obj.value = key
+      arr.push(obj)
+    }
+    console.log(JSON.stringify(arr))
+
+    this.test()
+  },
+  methods: {
+    test () {
+      // this.$ajax.get('',{},function (res) {
+      //
+      // }).then((res)=>{
+      // })
+    },
+    getjson () {
+      let that = this
+      var pk_checkflow = this.pk_checkflow
+      this.$ajax.get(that.$api.getData2 + '?pk_checkflow=' + pk_checkflow).then((res) => {
+        console.log(res)
+        that.tableData = res.data
+      })
+    },
+    handleSelectionChange (val) {
+      this.multipleSelection = val
+      console.log(val)
+    },
+    selectable (row, index) {
+      if (row.islock == 'Y') {
+        return false
+      } else {
+        return true
       }
     },
-    mounted () {
-      // this.tableData = jsondata
-      this.pk_checkflow = this.$route.query.pk_checkflow||'';
-      console.log(this.$route);
-      this.getjson();
-      let arr = []
-      for (var key in this.obj) {
-        let obj = {}
-        obj.name = ''
-        obj.value = key
-        arr.push(obj)
-      }
-      console.log(JSON.stringify(arr))
-
-      this.test();
-
-    },
-    methods: {
-      test(){
-        // this.$ajax.get('',{},function (res) {
-        //
-        // }).then((res)=>{
-        // })
-      },
-      getjson () {
-        let that = this;
-        var pk_checkflow  = this.pk_checkflow;
-        this.$axios.get(that.$api.getData2 + '?pk_checkflow='+pk_checkflow).then((res) => {
-          console.log(res);
-          that.tableData = res.data;
-        });
-      },
-      handleSelectionChange (val) {
-        this.multipleSelection = val;
-        console.log(val);
-      },
-      selectable(row,index){
-        if(row.islock=='Y'){
-          return false;
-        }else{
-          return true;
-        }
-      },
-      confirmClick () {
-        let arr_checked = this.multipleSelection||[];
-        if(arr_checked.length<1){
-          this.$message({
-            type: 'warning',
-            message: '请选择至少一个!'
-          });
-          return;
-        }
-        for(let i=0,j=arr_checked.length;i<j;i++){
-          arr_checked[i].islock = 'Y';
-        }
-        this.uncheckClick();
-
-        let that = this;
-        let msg = this.msg||'';
-        this.$axios.post(that.$api.commit2 + '?approve=Y&pk_checkflow='+this.pk_checkflow+ '&approvenote='+msg,{
-          data:JSON.stringify(arr_checked),
-        }).then((res) => {
-          console.log(res);
-          that.tableData = res;
+    confirmClick () {
+      let arr_checked = this.multipleSelection || []
+      if (arr_checked.length < 1) {
+        this.$message({
+          type: 'warning',
+          message: '请选择至少一个!'
         })
-
-      },
-      cancelClick () {
-        let that = this;
-        if((!this.multipleSelection)||this.multipleSelection.length<1){
-          that.$message({
-            type: 'warning',
-            message: '请选择至少一个!'
-          });
-          return;
-        }
-        let arr_checked = this.multipleSelection||[];
-        for(let i=0,j=arr_checked.length;i<j;i++){
-          arr_checked[i].islock = 'Y';
-        }
-        this.uncheckClick();
-        let msg = this.msg||'';
-        this.$axios.post(that.$api.commit2 + '?approve=N&pk_checkflow='+this.pk_checkflow+ '&approvenote='+msg,{
-          data:JSON.stringify(arr_checked),
-        }).then((res) => {
-          console.log(res);
-          that.tableData = res;
-        })
-      },
-      checkClick () {
-        this.$refs.multipleTable.toggleAllSelection();
-      },
-      uncheckClick () {
-        this.$refs.multipleTable.clearSelection();
-      },
-      tableRowClassName({row, rowIndex}) {
-          // return 'warning-row';
-          // return 'success-row';
-        return '';
+        return
       }
+      for (let i = 0, j = arr_checked.length; i < j; i++) {
+        arr_checked[i].islock = 'Y'
+      }
+      this.uncheckClick()
 
+      let that = this
+      let msg = this.msg || ''
+      this.$ajax.post(that.$api.commit2 + '?approve=Y&pk_checkflow=' + this.pk_checkflow + '&approvenote=' + msg, {
+        data: JSON.stringify(arr_checked)
+      }).then((res) => {
+        console.log(res)
+        that.$message({
+          type: 'warning',
+          message: '审批成功!'
+        })
+        that.getjson()
+      })
     },
+    cancelClick () {
+      let that = this
+      if ((!this.multipleSelection) || this.multipleSelection.length < 1) {
+        that.$message({
+          type: 'warning',
+          message: '请选择至少一个!'
+        })
+        return
+      }
+      let arr_checked = this.multipleSelection || []
+      for (let i = 0, j = arr_checked.length; i < j; i++) {
+        arr_checked[i].islock = 'Y'
+      }
+      this.uncheckClick()
+      let msg = this.msg || ''
+      this.$ajax.post(that.$api.commit2 + '?approve=N&pk_checkflow=' + this.pk_checkflow + '&approvenote=' + msg, {
+        data: JSON.stringify(arr_checked)
+      }).then((res) => {
+        console.log(res)
+        that.$message({
+          type: 'warning',
+          message: '审批成功!'
+        })
+        that.getjson()
+      })
+    },
+    checkClick () {
+      this.$refs.multipleTable.toggleAllSelection()
+    },
+    uncheckClick () {
+      this.$refs.multipleTable.clearSelection()
+    },
+    tableRowClassName ({ row, rowIndex }) {
+      // return 'warning-row';
+      // return 'success-row';
+      return ''
+    }
 
   }
+
+}
 </script>
 
 <style scoped>

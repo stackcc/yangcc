@@ -42,10 +42,28 @@ npm install qrcode
 ```
 npm install --save vue-cookies 
 ```
+###  端口异常
+```
+npm install portfinder@1.0.21
+```
+###  markdown / 解析 / 高亮
+```
+npm install mavon-editor --save
+npm install marked 
+npm install --save vue-highlightjs
+npm install --save highlight.js
+```
 ###  less
 ```
 npm i less@2.7.3 less-loader --save
 ```
+
+### [sass](https://cli.vuejs.org/config/).
+```
+npm install -D sass-loader node-sass
+```
+
+
 ###  particles
 [^_^]: # (粒子特效)
 ```
@@ -74,6 +92,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 历程 - 使用markdown
 ```
 [^_^]: # (stack:页面只有一个输入框 + 提示，列出快捷路径)
+[^_^]: # (添加建议提交)
 
 ```
 /start
@@ -84,5 +103,24 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 /css
 ```
 [^_^]: # (css 3D 特效)
+```
+
+/wallpaper
+```
+[^_^]: # (壁纸)
+
+
+
+
+
+
+
+[^_^]: # (修改复制事件)
+[^_^]: # (请求时间做统一返回的状态处理)
+
+
+
+
+
 
 

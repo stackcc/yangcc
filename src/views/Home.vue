@@ -32,61 +32,61 @@
 </template>
 
 <script>
-  // @ is an alias to /src
-  // import HelloWorld from '@/components/HelloWorld.vue'
+// @ is an alias to /src
+// import HelloWorld from '@/components/HelloWorld.vue'
 
-  export default {
-    name: 'home',
-    components: {
-      // HelloWorld
-    },
-    data () {
-      return {
-        viewShow: true,
-        activeIndex: '',
-        menu: null,
+export default {
+  name: 'home',
+  components: {
+    // HelloWorld
+  },
+  data () {
+    return {
+      viewShow: true,
+      activeIndex: '',
+      menu: null
+    }
+  },
+  mounted () {
+    this.menu = this.$setup.home.menu
+    window.addEventListener('scroll', this.handleScroll, true)
+  },
+  methods: {
+    onMenuSelect (i) {
+      if (!i) { return }
+      var in_1, in_2, path
+      if (i.indexOf('-') > -1) {
+        in_1 = Number(i.split('-')[0]) - 1
+        in_2 = Number(i.split('-')[1]) - 1
+        path = this.menu[in_1].child[in_2].path
+      } else {
+        in_1 = Number(i) - 1
+        path = this.menu[in_1].path
       }
+      this.$router.push(path)
     },
-    mounted () {
-      this.menu = this.$cset.home.menu
-      window.addEventListener('scroll', this.handleScroll, true)
+    handleScroll () {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop // 变量windowHeight是可视区的高度
+      var windowHeight = document.documentElement.clientHeight || document.body.clientHeight // 变量scrollHeight是滚动条的总高度
+      var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
+      // if(scrollHeight>100){
+      //   this.$store.state.auth.home.viewShow = false;
+      // }else if(scrollHeight<80){
+      //   this.$store.state.auth.home.viewShow = true;
+      // }
     },
-    methods: {
-      onMenuSelect (i) {
-        if(!i){return;}
-        var in_1,in_2,path;
-        if(i.indexOf('-')>-1){
-          in_1 = Number(i.split('-')[0])-1;
-          in_2 = Number(i.split('-')[1])-1;
-          path = this.menu[in_1].child[in_2].path;
-        }else{
-          in_1 = Number(i)-1;
-          path = this.menu[in_1].path;
-        }
-        this.$router.push(path);
-      },
-      handleScroll () {
-        var scrollTop =document.documentElement.scrollTop || document.body.scrollTop //变量windowHeight是可视区的高度
-        var windowHeight =document.documentElement.clientHeight || document.body.clientHeight //变量scrollHeight是滚动条的总高度
-        var scrollHeight =document.documentElement.scrollHeight || document.body.scrollHeight;
-        // if(scrollHeight>100){
-        //   this.$store.state.auth.home.viewShow = false;
-        // }else if(scrollHeight<80){
-        //   this.$store.state.auth.home.viewShow = true;
-        // }
-      },
-      onMenuToggle(){
-        // this.homeViewShow=!this.homeViewShow;
-        this.$store.state.auth.home.viewShow = !this.homeViewShow;
-      }
-    },
-    computed: {
-      homeViewShow () {
-        return this.$store.state.auth.home.viewShow
-      }
-    },
-    watch: {}
-  }
+    onMenuToggle () {
+      // this.homeViewShow=!this.homeViewShow;
+      this.$store.state.auth.home.viewShow = !this.homeViewShow
+    }
+  },
+  computed: {
+    homeViewShow () {
+      return this.$store.state.auth.home.viewShow
+    }
+  },
+  watch: {}
+}
 </script>
 <style scope>
   .menu .menu-group{

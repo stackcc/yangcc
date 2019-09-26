@@ -21,14 +21,22 @@
 .c_m_r_n{ margin-right: 15px;}
 
 .c_m_t_5{ margin-top: 5px;}
+.c_m_l_10{margin-left: 10px;}
 
 .c_w{ width: 100%; }
 .c_h{ height: 100%; }
+.c_w_100{ width: 100vw; }
+.c_h_100{ height: 100vh; }
+.c_hidden{ overflow: hidden; }
+.c_auto{ overflow: auto; }
+.c_auto_x{ overflow-x: auto; }
+.c_auto_y{ overflow-y: auto; }
 
 /* size */
 .c_size_13{font-size: 13px;}
 .c_size_14{font-size: 14px;}
 .c_size_16{font-size: 16px;}
+.c_size_18{font-size: 18px;}
 .c_size_20{font-size: 20px;}
 .c_size_22{font-size: 22px;}
 .c_size_26{font-size: 26px;}
@@ -103,6 +111,7 @@
 
 /* flex */
 .c_flex{display: flex;}
+.c_flex_row{flex-direction: row;}
 .c_flex_col{flex-direction: column;}
 .c_flex_1{flex: 1;}
 .c_flex_center{align-items: center;justify-content:center;}

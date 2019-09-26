@@ -10,15 +10,15 @@
 </template>
 
 <script>
-  export default {
-    name: 'calendar',
-    data(){
-      return {
-        value : new Date()
-      }
-    },
-
+export default {
+  name: 'calendar',
+  data () {
+    return {
+      value: new Date()
+    }
   }
+
+}
 </script>
 
 <style scoped>

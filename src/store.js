@@ -5,14 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-      auth:{
-        home:{
-          viewShow:false
-        },
-        index:{
-          lock:false
-        }
+    auth: {
+      cc:false,
+      home: {
+        viewShow: false
+      },
+      index: {
+        lock: false
       }
+    }
   },
   mutations: {
 

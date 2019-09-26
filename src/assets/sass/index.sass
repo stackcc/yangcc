@@ -1,0 +1,76 @@
+////变量初始化
+////图像分块个数，如要更改，html需要进行相应的修改
+//$numPoster:10;
+//
+////轮换图像个数，如要更改，html需要进行相应的修改
+//$numFace:3;
+//
+////图像宽度
+//$width:600px;
+//
+////图像高度
+//$height:320px;
+//
+////盒子的设置
+//.billboard {
+//  width:$width;
+//  margin:100px auto;
+//}
+//
+////图像条左浮动
+//.poster {
+//  float:left;
+//  width:$width/$numPoster;
+//  height:$height;
+//}
+//
+////图像条面的统一设置，绝对定位、3d动画设置
+//.face {
+//  position:absolute;
+//  height:$height;
+//  width:$width/$numPoster;
+//  transform-origin:50% 50% -17px;
+//  backface-visibility: hidden;
+//  transform-style:preserve-3d;
+//  perspective:350px;
+//}
+//
+////图像条面分别设置背景图像、动画
+//@for $i from 1 through $numFace{
+//  .poster .panel#{$i} {
+//    background:url(http://gx.zptc.cn/whqet/img/#{$i}.jpg);
+//    transform:transformY(360deg/$numFace*($i - 1));
+//    animation: rotateMe#{$i} 10s infinite;
+//}
+//  @keyframes rotateMe#{$i} {
+//  0% {
+//  transform:rotateY(360deg/$numFace*($i - 1));
+//}
+//  9% {
+//  transform:rotateY(360deg/$numFace*($i - 1));
+//}
+//  24% {
+//  transform:rotateY(360deg/$numFace*($i));
+//}
+//  42% {
+//  transform:rotateY(360deg/$numFace*($i));
+//}
+//  57% {
+//  transform:rotateY(360deg/$numFace*($i + 1));
+//}
+//  75% {
+//  transform:rotateY(360deg/$numFace*($i + 1));
+//}
+//  90% {
+//  transform:rotateY(360deg/$numFace*($i + 2));
+//}
+//  100% {
+//  transform:rotateY(360deg/$numFace*($i + 2));
+//}
+//}
+//}
+//
+////图像条面的背景偏移
+//@for $i from 1 through $numPoster {
+//  .poster .p#{$i} {background-position:-($width/$numPoster*($i - 1)) top;}
+//}
