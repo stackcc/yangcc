@@ -48,35 +48,55 @@
 .c_b{ border: 1px solid #ccc; }
 .c_b_b{ border-bottom: 1px solid #ccc; }
 
+
+:root{
+    --white:#fff;
+    --red:#e50012 !important;
+    --green:#6ac8a8 !important;
+    --yellow:#feb54c ;
+    --pink:rgb(243,125,131);
+    --blue:#41c7ff !important;
+    --blue-dark:rgb(3,161,193);
+    --blue-light:rgb(9,209,229);
+    --purple-light:rgb(106,120,209);
+    --orange:rgb(242,98,53);
+    --gray:#909195;
+    --eee:#eeeeee;
+    --gray-drak:#a0a1a5;
+    --black:rgb(51,71,71);
+    --star:rgb(51,71,71);
+    --transparent:transparent !important;
+}
 /*主色*/
-.c_transparent{color:transparent !important;}
-.c_white{color:#fff !important;}
-.c_red{color:red !important;}
-.c_green{color:rgb(3,162,228) !important;}
-.c_blue{color:rgb(3,162,228) !important; }
-.c_blue_dark{color:rgb(3,161,193); }
-.c_orange{color:rgb(242,98,53); }
-.c_gray{color:rgb(184,195,206); }
-.c_gray_drak{color:rgb(108,125,135); }
-.c_black{color:rgb(51,71,71); }
-.c_star{color:rgb(51,71,71); }
+.c_transparent{color:var(--transparent);}
+.c_white{color:var(--white);}
+.c_red{color:var(--red)}
+.c_green{color:var(--green);}
+.c_blue{color:var(--blue) !important; }
+.c_blue_dark{color:var(--blue-dark); }
+.c_orange{color:var(--orange); }
+.c_gray{color:var(--gray); }
+.c_gray_drak{color:var(--gray-drak); }
+.c_eee{color:var(--eee); }
+.c_black{color:var(--black); }
+.c_star{color:var(--star); }
 /*主色*/
-.bg_blue{background:rgb(3,162,228); }
-.bg_blue_dark{background:rgb(3,161,193); }
-.bg_orange{background:rgb(242,98,53); }
-.bg_gray{background:#f5f5f5; }
-.bg_gray_drak{background:rgb(108,125,135); }
-.bg_black{background:rgb(51,71,71); }
-.bg_yellow{background:rgb(253,185,51); }
-.bg_transparent{ background:transparent;}
-.bg_white{ background:#fff;}
-.bg_blue_light{background:#e8f4f7;}
+.bg_blue{background:var(--blue); }
+.bg_blue_dark{background:var(--blue-dark); }
+.bg_orange{background:var(--orange); }
+.bg_gray{background:var(--gray); }
+.bg_gray_drak{background:var(--gray-drak); }
+.bg_black{background:var(--black); }
+.bg_yellow{background:var(--yellow); }
+.bg_transparent{ background:var(--transparent);}
+.bg_white{ background:var(--white);}
+.bg_blue_light{background:var(--blue-light);}
 /*辅助色*/
-.c_pink{color:rgb(243,125,131); }
-.c_yellow{color:rgb(189,200,65); }
-.c_blue_light{color:rgb(9,209,229); }
-.c_purple_light{color:rgb(106,120,209); }
-.c_blue_navy{color:rgb(42,87,154); }
+.c_pink{color:var(--pink); }
+.c_yellow{color:var(--yellow); }
+.c_blue_light{color:var(--blue-light); }
+.c_purple_light{color:var(--purple-light); }
+
 /*悬浮时*/
 .c_h_blue_light:hover{background:#e8f4f7;}
 .c_h_underline:hover{border-bottom:1px solid rgb(3,162,228);}
@@ -121,6 +141,10 @@
 .c_flex_end{justify-content:flex-end;}
 .c_item_center{align-items: center;}
 .c_item_baseline{align-items: baseline;}
+.c_item_top{align-items: flex-start;}
+.c_flex_nowrap{flex-wrap: nowrap;}
+.c_flex_wrap{flex-wrap: wrap;}
+.c_flex_rewrap{flex-wrap: wrap-reverse;}
 
 /* 英文限制 */
 .c_break_all{ word-break: break-all;}
@@ -147,6 +171,7 @@
     -webkit-box-orient:vertical;
     overflow:hidden;
 }
+
 /*文本超出指定宽度改为省略号*/
 .c_ellipsis{
     display:inline-block;
@@ -158,6 +183,7 @@
     text-overflow: ellipsis;
     white-space:nowrap;
 }
+
 /*隐藏滚动条*/
 .scroll_hidden{
     -webkit-overflow-scrolling: touch;
@@ -179,6 +205,7 @@
 @keyframes c_loading{
     to {transform: rotate(-1turn) }
 }
+
 /* 3d */
 .c_rotate_90{
     transform:rotate(90deg);
@@ -221,4 +248,39 @@
 }
 .c_shadow_light{
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
+}
+
+
+
+/* animation */
+.c_animate{
+    transition: all .3s ease-in-out;
+}
+/*左移消失*/
+.c_h_0{height: 0;overflow: hidden;}
+.c_animate.c_hide_left{transform: translate3d(-100%, 0%, 0);}
+/*右移消失*/
+.c_animate.c_hide_right{transform: translate3d(100%, 0%, 0);}
+/*右移消失*/
+.c_animate.c_hide_bottom{ transform: translate3d(0%, 100%, 0);}
+/*复位*/
+.c_animate.c_reset{transform: translate3d(0%, 0%, 0) !important;}
+/*隐藏*/
+.c_animate_hide{
+    animation:c_animate_hide .5s  forwards;
+    /*
+     infinite(循环)  forwards(保持最后的动作)
+    */
+}
+
+@keyframes c_animate_hide{
+    from {
+        opacity: 1;
+        display: block;
+    }
+    to {
+        opacity: 0;
+        display: none;
+        height: 0;
+    }
 }

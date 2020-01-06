@@ -1,6 +1,5 @@
 <template>
   <div class="c_container c_rela">
-    <div @click="test">12346</div>
     <vue-particles
       :color="particles.color"
       :particleOpacity="particles.particleOpacity"
@@ -198,8 +197,6 @@
     },
     computed: {},
     methods: {
-      test(){console.log(1)},
-      test(){console.log(2)},
       querySearch (queryString, cb) {
         var restaurants = this.loadAll()
         var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : this.loadAll()
@@ -225,7 +222,8 @@
         ]
       },
       handleSelect (item) {
-        this.urlObj = item
+        // this.urlObj = item
+        this.$router.push(item.url)
       },
       toUrl () {
         if (this.urlObj && this.urlObj.url) {

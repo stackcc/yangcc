@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     auth: {
-      cc:false,
+      cc:true,
       home: {
         viewShow: false
       },

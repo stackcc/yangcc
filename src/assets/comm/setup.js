@@ -61,7 +61,7 @@ let setup = {
   cc: {
     view: true,
     ajax: true,
-    cc:false,
+    cc:true,
   },
   theway: {
     menu:[

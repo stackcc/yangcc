@@ -15,12 +15,12 @@
         </div>
       </div>
       <div class="c_p_n list">
-        <div class="group c_p_n c_rela" v-for="(item,i) in list" :key="i" :data-id="item.id"  @click="wayDetail">
+        <div class="group c_rela" v-for="(item,i) in list" :key="i" :data-id="item.id"  @click="wayDetail">
           <div class="c_size_26 c_m_b_n">{{item.title}}</div>
-          <div class="c_size_18 c_m_b_n c_blue">{{item.description}}</div>
-          <div class="c_size_18 c_m_b_n c_gray_drak c_box_3">{{item.content}}</div>
-          <div class="c_size_14 c_gray_drak">{{item.createtime}}</div>
-          <div class="opera c_flex c_item_center">
+          <div class="c_size_16 c_m_b_n c_blue">{{item.description}}</div>
+          <div class="c_size_18 c_m_b_n c_eee c_box_3">{{item.content}}</div>
+          <div class="c_size_14 c_eee">{{item.createtime}}</div>
+          <div class="opera c_animate c_flex c_item_center">
             <div class="edit c_blue c_size_18 c_m_l_10 c_pointer" @click.prevent.stop="editWay" :data-id="item.id" v-show="info.id==item.userid">
               <i class="el-icon-edit"></i>
             </div>
@@ -46,12 +46,16 @@
           id: 1,
         },
         list: [
-
+          {
+            title:'萨尔王',
+            description:'成熟度好人as服务卡乐芙螺蛳粉',
+            content:'师大会把我比武我航次大雾Hi好wish的接口减为空你借口'
+          }
         ],
       }
     },
     mounted () {
-      this.getWay();
+      // this.getWay();
     },
     computed: {},
     methods: {
@@ -111,16 +115,16 @@
 
   }
   .group{
-    background: #f2f2f2;
+    background: rgba(245, 245, 245, 0.3);
     margin-top: 15px;
     border-radius: 5px;
+    padding: 30px;
   }
   .opera{
     position: absolute;
-    right: 5px;
-    top: 5px;
+    right: 15px;
+    top: 15px;
     opacity: 0;
-    transition: all linear 1s;
   }
   .group:hover .opera{
     opacity: 1;
