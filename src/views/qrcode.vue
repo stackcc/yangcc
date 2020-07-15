@@ -1,7 +1,7 @@
 <template>
   <div class="c_container c_rela">
     <div class="route c_flex c_flex_center ">
-      <div class="">
+      <div class="c_flex_col c_h_max c_flex c_m_t_n c_hidden">
         <div class="c_flex c_flex_center ">
           <el-input
             class="inline-input "

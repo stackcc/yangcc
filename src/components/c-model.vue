@@ -21,45 +21,45 @@
 </template>
 
 <script>
-  // <c-model @saveClick="saveTypeClick" :isShow="type_params.isShow">
-  //   <template slot="title">选择施工部位</template>
-  //   <template slot="main">
-  //   <mt-checklist
-  // v-model="type_arr"
-  // :options="typeList">
-  //   </mt-checklist>
-  //   </template>
-  //   </c-model>
-  // typeList:[{label: "厨房",value:"厨房"},]
+// <c-model @saveClick="saveTypeClick" :isShow="type_params.isShow">
+//   <template slot="title">选择施工部位</template>
+//   <template slot="main">
+//   <mt-checklist
+// v-model="type_arr"
+// :options="typeList">
+//   </mt-checklist>
+//   </template>
+//   </c-model>
+// typeList:[{label: "厨房",value:"厨房"},]
 
-  export default {
-    name: "c-model",
-    data() {
-      return {
-          // isShow: false,
-      }
+export default {
+  name: 'c-model',
+  data () {
+    return {
+      // isShow: false,
+    }
+  },
+  props: {
+    'isShow': Boolean
+  },
+  mounted () {
+  },
+  methods: {
+    modelClick: function () {
+      // this.isShow = true;
     },
-    props: {
-      "isShow": Boolean
-    },
-    mounted() {
-    },
-    methods: {
-      modelClick: function () {
-        // this.isShow = true;
-      },
 
-      saveClick: function (bool) {
-          // this.$emit('saveClick', this);
-      },
-    },
-    watch: {
-      "isShow": function (val) {
-        if (val) {
-        }
+    saveClick: function (bool) {
+      // this.$emit('saveClick', this);
+    }
+  },
+  watch: {
+    'isShow': function (val) {
+      if (val) {
       }
     }
   }
+}
 </script>
 
 <style scoped>

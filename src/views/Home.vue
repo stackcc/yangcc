@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home c_flex c_flex_col c_h_100 ">
     <!--<img alt="Vue logo" src="../assets/logo.png">-->
     <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
     <!--<router-link to="/home">Home</router-link> |-->
@@ -27,7 +27,7 @@
         </el-menu>
       </div>
     </transition>
-    <router-view></router-view>
+    <router-view class="c_flex_1 c_auto_y"></router-view>
   </div>
 </template>
 

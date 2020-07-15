@@ -26,73 +26,139 @@ let util = {
   extend: function (target, source) {
     for (var p in source) {
       if (source.hasOwnProperty(p)) {
-        target[p] = source[p];
+        target[p] = source[p]
       }
     }
-    return target;
+    return target
   },
 
   json2Form: function (json) {
-    var str = [];
+    var str = []
     for (var p in json) {
-      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(json[p]));
+      str.push(encodeURIComponent(p) + '=' + encodeURIComponent(json[p]))
     }
-    return str.join("&");
+    return str.join('&')
   },
 
-  //邮箱验证
+  // 邮箱验证
   checkEmail: function (v) {
-    var filter = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
-    return filter.test(v);
-  },
-  //手机号吗验证
-  tel: function (v) {
-    return /^1\d{10}$/.test(v);
+    var filter = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+    return filter.test(v)
   },
 
-  //验证网址
-  uniform: function (v,type) {
-    let reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])/;
-    let reg1 = /[hHtTpPsS]{4,5}:\/\/[\S]+[\s\n\t]*/;
-    if(type == 'outLink'){
+  // 手机号码验证
+  tel: function (v) {
+    return /^1\d{10}$/.test(v)
+  },
+
+  /**
+   * 电话号码验证
+   * @param{string} s 电话号码
+   * @return boolean
+   */
+  isPhone(s) {
+    return /^([0-9]{3,4}-)?[0-9]{7,8}$/.test(s)
+  },
+
+  // 验证网址
+  uniform: function (v, type) {
+    let reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])/
+    let reg1 = /[hHtTpPsS]{4,5}:\/\/[\S]+[\s\n\t]*/
+    if (type == 'outLink') {
       let arr = [
-        "mp.weixin.qq.com",
-      ];
-      let bool = false;
-      for(let i=0,j=arr.length;i<j;i++){
-        if(v.indexOf(arr[i]) != -1){
-          bool = true;
-          break;
+        'mp.weixin.qq.com'
+      ]
+      let bool = false
+      for (let i = 0, j = arr.length; i < j; i++) {
+        if (v.indexOf(arr[i]) != -1) {
+          bool = true
+          break
         }
       }
-      let regBool = reg1.test(v);
-      console.log(regBool);
-      if(regBool && bool){
-        bool = true;
-      }else{
-        bool = false;
+      let regBool = reg1.test(v)
+      console.log(regBool)
+      if (regBool && bool) {
+        bool = true
+      } else {
+        bool = false
       }
-      return bool;
-    }else{
-      return reg.test(v);
+      return bool
+    } else {
+      return reg.test(v)
     }
-
   },
 
-  //验证身份证
+  // 合法uri
+  validateUrl(textval) {
+    const urlregex = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/
+    return urlregex.test(textval)
+  },
+
+  // 验证身份证
   checkIDCard: function (v) {
-    var isIDCard1 = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+    var isIDCard1 = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/
     if (isIDCard1.test(v)) {
-      var card = v.slice(6, 10);
-      var data = new Date();
-      var year = data.getFullYear();
-      var num = year - card;
+      var card = v.slice(6, 10)
+      var data = new Date()
+      var year = data.getFullYear()
+      var num = year - card
       if (num > 18) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     }
+  },
+
+  /**
+   * 判断身份证号码
+   * @param name
+   * @return {*}
+   */
+  cardid(code) {
+    let list = [];
+    let result = true;
+    let msg = '';
+    var city = {"11":"北京","12":"天津","13":"河北","14":"山西","15":"内蒙古","21":"辽宁","22":"吉林","23":"黑龙江 ","31":"上海","32":"江苏","33":"浙江","34":"安徽","35":"福建","36":"江西","37":"山东","41":"河南","42":"湖北 ","43":"湖南","44":"广东","45":"广西","46":"海南","50":"重庆","51":"四川","52":"贵州","53":"云南","54":"西藏 ","61":"陕西","62":"甘肃","63":"青海","64":"宁夏","65":"新疆","71":"台湾","81":"香港","82":"澳门","91":"国外 "};
+    if (!this.isnull(code)) {
+      if (code.length == 18) {
+        if (!code || !/(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(code)) {
+          msg = "证件号码格式错误";
+        } else if (!city[code.substr(0, 2)]) {
+          msg = "地址编码错误";
+        } else {
+          //18位身份证需要验证最后一位校验位
+          code = code.split('');
+          //∑(ai×Wi)(mod 11)
+          //加权因子
+          var factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+          //校验位
+          var parity = [1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2, 'x'];
+          var sum = 0;
+          var ai = 0;
+          var wi = 0;
+          for (var i = 0; i < 17; i++) {
+            ai = code[i];
+            wi = factor[i];
+            sum += ai * wi;
+          }
+          if (parity[sum % 11] != code[17]) {
+            msg = "证件号码校验位错误";
+          } else {
+            result = false;
+          }
+
+        }
+      } else {
+        msg = "证件号码长度不为18位";
+      }
+
+    } else {
+      msg = "证件号码不能为空";
+    }
+    list.push(result);
+    list.push(msg);
+    return list;
   },
 
   // 获取地址栏参数
@@ -146,46 +212,6 @@ let util = {
       bd_lat: bd_lat
     }
   },
-  // 数组对象深复制
-  deepCopy: function (data) {
-    // 深拷贝
-    let o = {
-      run: function (val) {
-        let result = ''
-        if (val instanceof Array) {
-          result = this.copyArr(val)
-        } else {
-          result = this.copyObj(val)
-        }
-        return result
-      },
-      copyArr: function (arr) {
-        var arr_temp = []
-        if (arr) {
-          for (let i = 0, j = arr.length; i < j; i++) {
-            if (arr[i] instanceof Array) {
-              arr_temp[i] = this.copyArr(arr[i])
-            } else if (arr[i] instanceof Object) {
-              arr_temp[i] = this.copyObj(arr[i])
-            } else arr_temp[i] = arr[i]
-          }
-        }
-        return arr_temp
-      },
-      copyObj: function (obj) {
-        let obj_temp = {}
-        for (let key in obj) {
-          if (obj[key] instanceof Array) {
-            obj_temp[key] = this.copyArr(obj[key])
-          } else if (obj[key] instanceof Object) {
-            obj_temp[key] = this.copyObj(obj[key])
-          } else obj_temp[key] = obj[key]
-        }
-        return obj_temp
-      }
-    }
-    return o.run(data)
-  },
 
   // 打印，调试
   log: function (msg, type, styleCss) {
@@ -193,29 +219,35 @@ let util = {
       switch (type) {
         case 'time': // 运行时间
           console.time()
-          break;
+          break
         case 'timeEnd':
           console.timeEnd()
-          break;
+          break
         case 'profile': // 代码性能分析器
           console.profile()
-          break;
+          break
         case 'profileEnd':
           console.profileEnd()
-          break;
+          break
         case 'warn':
           console.warn(msg)
-          break;
+          break
         case 'error':
           console.error(msg)
-          break;
+          break
         case 'info':
           console.info(msg)
-          break;
+          break
+        case 'dir':
+          console.dir(msg)
+          break
+        case 'table':
+          console.table(msg)
+          break
         case 'color':
-          styleCss = styleCss|| 'background:linear-gradient(to right, red, purple);-webkit-background-clip: text;color: white;'
-          console.log('%c'+ msg, styleCss)
-          break;
+          styleCss = styleCss || 'background:linear-gradient(to right, red, purple);-webkit-background-clip: text;color: white;'
+          console.log('%c' + msg, styleCss)
+          break
         default:
           console.log(msg)
       }
@@ -224,7 +256,7 @@ let util = {
 
   /**
    *  时间格式化
-   * @param {date} time
+   * @param {Date} time
    * @param {String||datetime|date} type
    * @return {string}
    */
@@ -269,7 +301,9 @@ let util = {
   },
 
   /**
-   * 动态展示时间
+   *  动态时间
+   * @param {Date} time
+   * @return {string}
    */
   setTime: function (time) {
     time = this.timeFormat(time);
@@ -296,6 +330,19 @@ let util = {
       ts = ('刚刚').toString();
     }
     return ts;
+  },
+
+  /**
+   *  数组对象深复制
+   * @param {array||object} data
+   * @return {array||object}
+   */
+  deepCopy: function (data) {
+    let res = data instanceof Array?[]:{};
+    for(let key in data){
+      res[key] = data[key] instanceof Object?this.deepCopy(data[key]):data[key];
+    }
+    return res;
   },
 
   /**
@@ -348,6 +395,74 @@ let util = {
     }
   },
 
+  /**
+   * url 转义函数
+   * @param {String} url
+   * @param {String} type
+   */
+  transfer:function(url,type){
+    if(type == 'reverse'){
+      url = url.replace(/%3F/g,'?');
+      url = url.replace(/%2F/g,'/');
+      url = url.replace(/%26/g,'&');
+      url = url.replace(/%3D/g,'=');
+    }else{
+      url = url.replace(/\?/g,'%3F');
+      url = url.replace(/\//g,'%2F');
+      url = url.replace(/\&/g,'%26');
+      url = url.replace(/\=/g,'%3D');
+    }
+    return url;
+  },
+
+  /**
+   * 格式转换  url 《=》 对象
+   * @param {Object||String} data
+   */
+  urlFormat:function(data){
+    if(typeof data == 'string'){
+      data = '???'+ data;
+      data = data.replace(/\?{3,}/g,'');
+      let arr = data.split('&');
+      let obj = {};
+      arr.forEach(item=>{
+        let subArr = item.split("=");
+        obj[subArr[0]] = subArr[1];
+      });
+      return obj;
+    }else if(typeof data == 'object'){
+      let arr = [];
+      for(let key in data){
+        arr.push(key+'='+data[key]);
+      }
+      let str = arr.join('&');
+      return str||'';
+    }
+  },
+
+  /**
+   * 判断是否为空
+   * @param {*} val
+   * @return {boolean}
+   */
+  isnull(val) {
+    if (typeof val == 'boolean') {
+      return false;
+    }
+    if (typeof val == 'number') {
+      return false;
+    }
+    if (val instanceof Array) {
+      if (val.length == 0) return true;
+    } else if (val instanceof Object) {
+      if (JSON.stringify(val) === '{}') return true;
+    } else {
+      if (val == 'null' || val == null || val == 'undefined' || val == undefined || val == '') return true;
+      return false
+    }
+    return false
+  }
+
 }
-//数字 加减
-export default { ...util}
+// 数字 加减
+export default { ...util }

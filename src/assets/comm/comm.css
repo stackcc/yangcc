@@ -1,12 +1,31 @@
+:root{
+    --basic-px:15px;
+    --white:#fff;
+    --red:#e50012 !important;
+    --green:#6ac8a8 !important;
+    --yellow:#feb54c ;
+    --pink:rgb(243,125,131);
+    --blue:#41c7ff !important;
+    --blue-dark:rgb(3,161,193);
+    --blue-light:rgb(9,209,229);
+    --purple-light:rgb(106,120,209);
+    --orange:rgb(242,98,53);
+    --gray:#909195;
+    --eee:#eeeeee;
+    --gray-drak:#a0a1a5;
+    --black:rgb(51,71,71);
+    --star:rgb(51,71,71);
+    --transparent:transparent !important;
+}
 /*每个页面公共css */
 .c_box{box-sizing: border-box;}
 .c_hide{ display: none;}
-.c_p_n{ padding: 15px;}
+.c_p_n{ padding: var(--basic-px);}
 .c_p_10{ padding: 10px;}
-.c_p_t_n{ padding-top: 15px;}
-.c_p_b_n{ padding-bottom: 15px;}
-.c_p_l_n{ padding-left: 15px;}
-.c_p_r_n{ padding-right:15px;}
+.c_p_t_n{ padding-top: var(--basic-px);}
+.c_p_b_n{ padding-bottom: var(--basic-px);}
+.c_p_l_n{ padding-left: var(--basic-px);}
+.c_p_r_n{ padding-right:var(--basic-px);}
 .c_p_0{ padding: 0px;}
 .c_p_t_0{ padding-top: 0px;}
 .c_p_b_0{ padding-bottom: 0px;}
@@ -14,13 +33,14 @@
 .c_p_r_0{ padding-right:0px;}
 
 .c_m_0{ margin: 0px;}
-.c_m_n{ margin: 15px;}
-.c_m_b_n{ margin-bottom:15px;}
-.c_m_t_n{ margin-top: 15px;}
-.c_m_l_n{ margin-left: 15px;}
-.c_m_r_n{ margin-right: 15px;}
+.c_m_n{ margin: var(--basic-px);}
+.c_m_b_n{ margin-bottom:var(--basic-px);}
+.c_m_t_n{ margin-top: var(--basic-px);}
+.c_m_l_n{ margin-left: var(--basic-px);}
+.c_m_r_n{ margin-right: var(--basic-px);}
 
 .c_m_t_5{ margin-top: 5px;}
+.c_m_t_20{ margin-top: 20px;}
 .c_m_l_10{margin-left: 10px;}
 
 .c_w{ width: 100%; }
@@ -28,6 +48,8 @@
 .c_w_100{ width: 100vw; }
 .c_h_100{ height: 100vh; }
 .c_hidden{ overflow: hidden; }
+.c_w_max{ max-width: 100%; }
+.c_h_max{ max-height: 100%; }
 .c_auto{ overflow: auto; }
 .c_auto_x{ overflow-x: auto; }
 .c_auto_y{ overflow-y: auto; }
@@ -48,25 +70,6 @@
 .c_b{ border: 1px solid #ccc; }
 .c_b_b{ border-bottom: 1px solid #ccc; }
 
-
-:root{
-    --white:#fff;
-    --red:#e50012 !important;
-    --green:#6ac8a8 !important;
-    --yellow:#feb54c ;
-    --pink:rgb(243,125,131);
-    --blue:#41c7ff !important;
-    --blue-dark:rgb(3,161,193);
-    --blue-light:rgb(9,209,229);
-    --purple-light:rgb(106,120,209);
-    --orange:rgb(242,98,53);
-    --gray:#909195;
-    --eee:#eeeeee;
-    --gray-drak:#a0a1a5;
-    --black:rgb(51,71,71);
-    --star:rgb(51,71,71);
-    --transparent:transparent !important;
-}
 /*主色*/
 .c_transparent{color:var(--transparent);}
 .c_white{color:var(--white);}
@@ -222,6 +225,7 @@
     padding: 0;
     margin: 0;
     position: relative;
+    overflow: hidden;
 }
 .c_container_bg{
     position: absolute;
@@ -240,6 +244,7 @@
     position: relative;
     z-index: 3;
     /*filter: blur(2px);*/
+    overflow: auto;
 }
 
 /*投影*/

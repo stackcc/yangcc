@@ -31,107 +31,106 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'theway',
-    components: {},
-    data () {
-      return {
-        id:'',
-        obj: {
-          title: '',
-          description: '',
-        },
-        content: '',
+export default {
+  name: 'theway',
+  components: {},
+  data () {
+    return {
+      id: '',
+      obj: {
+        title: '',
+        description: ''
+      },
+      content: '',
 
-        arr: [
-          { name: '标题', isshow: true, key: 'title', placeholder: '请输入标题', icon: 'el-icon-collection', tips: '' },
-          { name: '地址', isshow: false, key: 'url', placeholder: '请输入地址', icon: 'el-icon-paperclip', tips: '' },
-          {
-            name: '描述',
-            isshow: true,
-            key: 'description',
-            placeholder: '请输入描述',
-            icon: 'el-icon-collection-tag',
-            tips: '用 ，号分割，可做为关键字'
-          },
-        ],
-        menu: [],
-        template: [],
+      arr: [
+        { name: '标题', isshow: true, key: 'title', placeholder: '请输入标题', icon: 'el-icon-collection', tips: '' },
+        { name: '地址', isshow: false, key: 'url', placeholder: '请输入地址', icon: 'el-icon-paperclip', tips: '' },
+        {
+          name: '描述',
+          isshow: true,
+          key: 'description',
+          placeholder: '请输入描述',
+          icon: 'el-icon-collection-tag',
+          tips: '用 ，号分割，可做为关键字'
+        }
+      ],
+      menu: [],
+      template: [],
 
-        defaultOpen: 'preview', //edit
-        toolbars: {
-          bold: true, // 粗体
-          italic: true, // 斜体
-          header: true, // 标题
-          underline: true, // 下划线
-          mark: true, // 标记
-          superscript: true, // 上角标
-          quote: true, // 引用
-          ol: true, // 有序列表
-          link: true, // 链接
-          imagelink: true, // 图片链接
-          help: true, // 帮助
-          code: true, // code
-          subfield: true, // 是否需要分栏
-          fullscreen: true, // 全屏编辑
-          readmodel: true, // 沉浸式阅读
-          /* 1.3.5 */
-          undo: true, // 上一步
-          trash: true, // 清空
-          save: true, // 保存（触发events中的save事件）
-          /* 1.4.2 */
-          navigation: true // 导航目录
-        },
+      defaultOpen: 'preview', // edit
+      toolbars: {
+        bold: true, // 粗体
+        italic: true, // 斜体
+        header: true, // 标题
+        underline: true, // 下划线
+        mark: true, // 标记
+        superscript: true, // 上角标
+        quote: true, // 引用
+        ol: true, // 有序列表
+        link: true, // 链接
+        imagelink: true, // 图片链接
+        help: true, // 帮助
+        code: true, // code
+        subfield: true, // 是否需要分栏
+        fullscreen: true, // 全屏编辑
+        readmodel: true, // 沉浸式阅读
+        /* 1.3.5 */
+        undo: true, // 上一步
+        trash: true, // 清空
+        save: true, // 保存（触发events中的save事件）
+        /* 1.4.2 */
+        navigation: true // 导航目录
       }
     }
-    ,
-    mounted (e) {
-      this.menu = this.$util.deepCopy(this.$setup.theway.menu)
-      this.template = this.$util.deepCopy(this.$setup.theway.template)
-      var id = this.$route.query.id;
-      if(id){
-        this.id = id;
-        this.getWay(id);
-      }
+  },
+  mounted (e) {
+    this.menu = this.$util.deepCopy(this.$setup.theway.menu)
+    this.template = this.$util.deepCopy(this.$setup.theway.template)
+    var id = this.$route.query.id
+    if (id) {
+      this.id = id
+      this.getWay(id)
+    }
+  },
+  computed: {},
+  methods: {
+    getContent (value, html) {
+      // markdown
+      console.log(value)
+      // html
+      console.log(html)
     },
-    computed: {},
-    methods: {
-      getContent (value, html) {
-        //markdown
-        console.log(value)
-        //html
-        console.log(html)
-      },
-      commit () {
-        let that = this;
-        let id = this.id;
-        let url = id?this.$api.thewayEdit:this.$api.thewayAdd;
-        var params = {
-          title: this.obj.title,
-          description: this.obj.description,
-          content: this.content,
+    commit () {
+      let that = this
+      let id = this.id
+      let url = id ? this.$api.thewayEdit : this.$api.thewayAdd
+      var params = {
+        title: this.obj.title,
+        description: this.obj.description,
+        content: this.content
 
-        };
-        id? params.id = id : (
-          params.userid=1,
-          params.username='cc',
-          params.createtime=(new Date()).toLocaleString('chinese',{hour12:false})
-        );
-        this.$ajax.post(url, params, function (res) {
-          that.$util.log(res)
-        })
-      },
-      getWay (id) {
-        let that = this
-        this.$ajax.get(this.$api.thewayList, {
-          id:id
-        }, function (res) {
-          that.obj = res[0];
-          that.content = res[0].content;
-        })
-      },
+      }
+      id ? params.id = id : (
+        params.userid = 1,
+        params.username = 'cc',
+        params.createtime = (new Date()).toLocaleString('chinese', { hour12: false })
+      )
+      this.$ajax.post(url, params, function (res) {
+        that.$util.log(res)
+      })
+    },
+    getWay (id) {
+      let that = this
+      this.$ajax.get(this.$api.thewayList, {
+        id: id
+      }, function (res) {
+        that.obj = res[0]
+        that.content = res[0].content
+      })
     }
   }
+}
 </script>
 <style lang="sass" rel="stylesheet/sass" scoped>
 

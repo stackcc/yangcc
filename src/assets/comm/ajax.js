@@ -9,14 +9,14 @@ import { Message, Loading } from 'element-ui'
 var fullLoading
 // var baseURL = 'http://cs-mj.iyuhong.com.cn:4235/mobile/malogin/formLogin.mob?username=18310600096&sms=9999';
 // var baseURL = window.location.host || ''
-var baseURL = '';
+var baseURL = ''
 // 添加请求拦截器，在发送请求之前做些什么(**具体查看axios文档**)--------------------------------------------
 axios.interceptors.request.use((config) => {
   // 显示loading
   fullLoading = Loading.service()
-  util.log(config);
-  return config;
-}, (error)=> {
+  util.log(config)
+  return config
+}, (error) => {
   // 请求错误时弹框提示，或做些其他事
   return Promise.reject(error)
 })
@@ -37,7 +37,7 @@ function errorState (response) {
   // 隐藏loading
   try {
     fullLoading.close()
-  }catch (e) {
+  } catch (e) {
 
   }
   // 如果http状态码正常，则直接返回数据
@@ -65,14 +65,14 @@ function successState (res) {
 
 // 封装axios--------------------------------------------------------------------------------------
 function apiAxios (method, url, data, headers, success, error) {
-  if(!setup.cc.ajax){return;}
-  if(!store.state.auth.cc){
+  if (!setup.cc.ajax) { return }
+  if (!store.state.auth.cc) {
     errorState()
     Message.error('权限失效')
-    return;
+    return
   }
-  if(store.state.auth.cc){
-    data = Object.assign({'auth':'cc'},data);
+  if (store.state.auth.cc) {
+    data = Object.assign({ 'auth': 'cc' }, data)
   }
   let httpDefault = {
     method: method,
@@ -82,8 +82,9 @@ function apiAxios (method, url, data, headers, success, error) {
     // `params` 是即将与请求一起发送的 URL 参数
     // `data` 是作为请求主体被发送的数据
     params: method === 'GET' || method === 'DELETE' ? data : null,
-    data: method === 'POST' || method === 'PUT' ? qs.stringify(data) : null,
-    timeout: 100000
+    // data: method === 'POST' || method === 'PUT' ? qs.stringify(data) : null,
+    data: data,
+    timeout: 10000
   }
 
   // 注意**Promise**使用(Promise首字母大写)
@@ -107,7 +108,7 @@ let ajax = {
       error = success
       success = header
     }
-    header = Object.assign({"Content-Type": "application/json"}, header)
+    header = Object.assign({ 'Content-Type': 'application/json' }, header)
     return apiAxios('GET', url, data, header, success, error)
   },
   post: (url, data, header, success, error) => {
@@ -115,7 +116,7 @@ let ajax = {
       error = success
       success = header
     }
-    header = Object.assign({"Content-Type":"application/x-www-form-urlencoded;charset=utf-8"}, header)
+    header = Object.assign({ 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }, header)
     return apiAxios('POST', url, data, header, success, error)
   },
   postform (url, data, header, success, error) {

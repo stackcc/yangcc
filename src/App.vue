@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <div class="c_container_html">
-      <div class="c_container_bg" :style="bg_attribute">
+      <div class="c_container_bg c_w_100 c_h_100" :style="bg_attribute">
       <!--<img :src="img" class="img_bg " alt="" />-->
       </div>
-      <div class="c_container_body">
+      <div class="c_container_body c_w_100 c_h_100">
         <!--<div id="nav">-->
           <!--<transition name="fade">-->
             <!--<router-view></router-view>-->
           <!--</transition>-->
         <!--</div>-->
         <transition :name="transitionName">
-          <router-view />
+          <router-view class="c_hidden c_w c_h" />
         </transition>
       </div>
       <el-button class="goStack c_all_pointer c_pointer" type="info" icon="el-icon-wind-power" circle @click="goStack"></el-button>

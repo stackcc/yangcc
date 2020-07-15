@@ -1,12 +1,12 @@
 import util from './util.js'
 import setup from './setup.js'
-let baseUrl = window.location.protocol + '//' + window.location.host;
-  if (process.env.NODE_ENV === 'production') {
-    baseUrl = setup.api.baseUrlPro
-  } else {
-    baseUrl = setup.api.baseUrlDev
-  }
-util.log(baseUrl);
+let baseUrl = window.location.protocol + '//' + window.location.host
+if (process.env.NODE_ENV === 'production') {
+  baseUrl = setup.api.baseUrlPro
+} else {
+  baseUrl = setup.api.baseUrlDev
+}
+util.log(baseUrl)
 var api = {
   // test1 -- 获取json
   getData: baseUrl + '/service/OnlineApproveServlet',
@@ -23,6 +23,6 @@ var api = {
   thewayAdd: baseUrl + '/theway/add',
   thewayEdit: baseUrl + '/theway/edit',
   thewayList: baseUrl + '/theway/list',
-  deltheway: baseUrl + '/theway/del',
+  deltheway: baseUrl + '/theway/del'
 }
 export default { ...api }

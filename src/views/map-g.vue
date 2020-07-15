@@ -19,7 +19,7 @@
 <script>
 import { AMapManager } from 'vue-amap'
 export default {
-  name: '',
+  name: 'mapg',
   data () {
     return {
       homeViewShow: true,
@@ -41,7 +41,7 @@ export default {
           }
         }
       ],
-      defaultCursor: cursors,
+      defaultCursor: "cursors",
       rotateEnable: true, // 地图是否可旋转，默认false
       resizeEnable: true // 是否监控地图容器尺寸变化，默认false
     }
@@ -69,6 +69,6 @@ export default {
 }
 .map-auto{
   width: 100vw;
-  height: calc( 100vh - 60px );
+  /*height: calc( 100vh - 60px );*/
 }
 </style>

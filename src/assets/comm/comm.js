@@ -3,4 +3,10 @@ import util from './util.js'
 import ajax from './ajax.js'
 import setup from './setup.js'
 
-export { util,api,ajax,setup }
+let osg = {
+  getUserType:function () {
+    return {};
+  },
+};
+
+export { util, api, ajax, setup,osg }

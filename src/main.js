@@ -10,33 +10,33 @@ import axios from 'axios'
 import elementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/reset.css'
 import 'element-ui/lib/theme-chalk/index.css'
-Vue.use(elementUI)
 
 // cookie 配置
 import cookies from 'vue-cookies'
-Vue.use(cookies)
 
 // 插件地图配置
 import aMap from 'vue-amap'
-Vue.use(aMap)
 
 // 插件 粒子配置
 import vueParticles from 'vue-particles'
-Vue.use(vueParticles)
 
-//markdown 配置
+// markdown 配置
 import 'mavon-editor/dist/css/index.css'
 import mavonEditor from 'mavon-editor'
-import highlight from './assets/comm/highlight'; // from 路径是highlight.js的路径，纯属自定义
-Vue.use(highlight);
-Vue.use(mavonEditor)
+import highlight from './assets/comm/highlight'
 
 // import vueHighlightJS from 'vue-highlightjs'
 // import 'highlight.js/styles/atom-one-dark.css'
 // Vue.use(vueHighlightJS)
 
 // 自定义配置
-import { util,api,ajax,setup } from './assets/comm/comm'
+import { util, api, ajax, setup } from './assets/comm/comm'
+Vue.use(elementUI)
+Vue.use(cookies)
+Vue.use(aMap)
+Vue.use(vueParticles) // from 路径是highlight.js的路径，纯属自定义
+Vue.use(highlight)
+Vue.use(mavonEditor)
 // import axiox from './assets/comm/axios'
 // Vue.use(axios, vueAxios)
 Vue.prototype.$axios = axios

@@ -63,6 +63,27 @@ npm i less@2.7.3 less-loader --save
 npm install -D sass-loader node-sass
 ```
 
+###  threejs
+```
+npm install three --save
+npm install imports-loader and exports-loader --save-dev
+npm install import-three-examples --save-dev
+
+vue-config.js
+const ThreeExamples = require('import-three-examples')
+pluginOptions: { ...ThreeExamples}
+
+view
+import * as THREE from "three";
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
+  
+```
+
+### webpack
+```
+npm install webpack webpack-cli -g
+```
+
 
 ###  particles
 [^_^]: # (粒子特效)
