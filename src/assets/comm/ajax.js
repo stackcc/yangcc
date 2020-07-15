@@ -82,7 +82,7 @@ function apiAxios (method, url, data, headers, success, error) {
     // `params` 是即将与请求一起发送的 URL 参数
     // `data` 是作为请求主体被发送的数据
     params: method === 'GET' || method === 'DELETE' ? data : null,
-    data: method === 'POST' || method === 'PUT' ? qs.stringify(data) : null,
+    data: data,
     timeout: 100000
   }
 
