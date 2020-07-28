@@ -1,17 +1,18 @@
 :root{
     --basic-px:15px;
     --white:#fff;
+    --eee:#eeeeee;
+    --white:#fff;
     --red:#e50012 !important;
     --green:#6ac8a8 !important;
     --yellow:#feb54c ;
     --pink:rgb(243,125,131);
-    --blue:#41c7ff !important;
+    --blue:rgb(3,162,228) !important;
     --blue-dark:rgb(3,161,193);
     --blue-light:rgb(9,209,229);
     --purple-light:rgb(106,120,209);
     --orange:rgb(242,98,53);
     --gray:#909195;
-    --eee:#eeeeee;
     --gray-drak:#a0a1a5;
     --black:rgb(51,71,71);
     --star:rgb(51,71,71);
