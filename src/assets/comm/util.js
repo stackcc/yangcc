@@ -268,16 +268,16 @@ let util = {
     }
     if(!time)time= new Date();
     if(!type)type='datetime';
-    var _Date = new Date(time);
-    var y,m,d,h,min,sec,result;
+    let _Date = new Date(time);
+    let result,
+    y = _Date.getFullYear(),
+    m = _Date.getMonth()+1,
+    d = _Date.getDate(),
+    h = _Date.getHours(),
+    min = _Date.getMinutes(),
+    sec = _Date.getSeconds();
     switch (type){
       case 'datetime':
-        y = _Date.getFullYear();
-        m = _Date.getMonth()+1;
-        d = _Date.getDate();
-        h = _Date.getHours();
-        min = _Date.getMinutes();
-        sec = _Date.getSeconds();
         result =  y +'-'+
           (m <10 ? '0'+m : m) +'-'+
           (d <10 ? '0'+d : d) +' '+
@@ -286,15 +286,14 @@ let util = {
           (sec <10 ? '0'+sec : sec);
         break;
       case 'date':
-        y = _Date.getFullYear();
-        m = _Date.getMonth()+1;
-        d = _Date.getDate();
-        h = _Date.getHours();
-        min = _Date.getMinutes();
-        sec = _Date.getSeconds();
         result =  y +'-'+
           (m <10 ? '0'+m : m) +'-'+
           (d <10 ? '0'+d : d) +' ';
+        break;
+      case 'time':
+        result =  (h <10 ? '0'+h : h)+':'+
+          (min <10 ? '0'+min : min)+':'+
+          (sec <10 ? '0'+sec : sec);
         break;
     }
     return result;
