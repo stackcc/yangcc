@@ -49,9 +49,9 @@ export default {
   methods: {
     getMap () {
       // amap vue component
-      console.log(amapManager._componentMap)
+      // console.log(amapManager._componentMap)
       // gaode map instance
-      console.log(amapManager._map)
+      // console.log(amapManager._map)
     }
   },
   watch: {

@@ -136,7 +136,6 @@
   </div>
 </template>
 <script>
-  import testdata from "@static/data.json"
 export default {
   name: 'stack',
   components: {
@@ -194,10 +193,10 @@ export default {
     }
   },
   mounted () {
-    this.$util.log({ 'a': 1 })
-    this.$ajax.localFile("",{ name:'data' }).then(res=>{
-      debugger
-    })
+    // this.$util.log({ 'a': 1 })
+    // this.$ajax.localFile("",{ name:'data' }).then(res=>{
+    //   debugger
+    // })
     // this.$ajax.localFile("",{ name:'data' }).then(res=>{
     //   debugger
     // })
@@ -221,7 +220,7 @@ export default {
     loadAll () {
       return [
         { "value": "列表视图", "url": "./stackList" },
-        { 'value': '地图', 'url': './mapg' },
+        { 'value': '地图', 'url': './map-g' },
         { 'value': '日历', 'url': './calendar' },
         { 'value': 'css', 'url': './css3' },
         { 'value': '二维码', 'url': './qrcode' },

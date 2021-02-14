@@ -18,8 +18,10 @@ let routes = [
   // },
 
   // 正式数据
-  { path: '/', name: 'stack', component: Stack },
+  { path: '/index', name: 'labourServices', component: () => import('./views/labourServices/list') },
+  { path: '/', redirect: '/index' },
   { path: '/stack', name: 'stack', component: Stack },
+  { path: '/404', name: '404',  component: () => import('./views/exception/404') },
   { path: '/home',
     name: 'home',
     component: Home,
@@ -28,6 +30,11 @@ let routes = [
       ...importPages(require.context('./views/doc',true,/\.vue$/,'lazy')),
       ...importPages(require.context('./views/fun',true,/\.vue$/,'lazy'))
     ]
+  },
+  {
+    'path': '*',
+    'redirect': '/404',
+    'hidden': true
   }
 ];
 
@@ -43,7 +50,6 @@ function importPages(r){
       name:((key.split(/[.\/]/))[2]),
       component:()=>r(key)
     });
-    console.log(r, key)
   });
   return list
 }

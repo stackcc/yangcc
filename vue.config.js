@@ -43,10 +43,13 @@ module.exports = {
   // },
   chainWebpack: (config) => {
     config.resolve.alias
+      .set('@', resolve('src'))
       .set('@static', resolve('src/static'))
-      .set('@assets', resolve('src/assets'))
+      .set('@utils', resolve('src/utils'))
+      .set('@assets', resolve('assets'))
       .set('@comp', resolve('src/components'))
-      .set('@c', resolve('src/assets/comm'))
+      .set('@api', resolve('src/api'))
+      .set('@views', resolve('src/views'))
     // // 配置 webpack 识别 markdown 为普通的文件
     // config.module
     //   .rule('markdown')

@@ -11,6 +11,10 @@ import elementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/reset.css'
 import 'element-ui/lib/theme-chalk/index.css'
 
+// ant-desing-vue
+// import Antd from 'ant-design-vue'
+// import 'ant-design-vue/dist/antd.less' // or 'ant-design-vue/dist/antd.less'
+
 // cookie 配置
 import cookies from 'vue-cookies'
 
@@ -32,6 +36,7 @@ import highlight from './assets/comm/highlight'
 // 自定义配置
 import { util, api, ajax, setup } from './assets/comm/comm'
 Vue.use(elementUI)
+// Vue.use(Antd)
 Vue.use(cookies)
 Vue.use(aMap)
 Vue.use(vueParticles) // from 路径是highlight.js的路径，纯属自定义
@@ -40,10 +45,10 @@ Vue.use(mavonEditor)
 // import axiox from './assets/comm/axios'
 // Vue.use(axios, vueAxios)
 Vue.prototype.$axios = axios
-Vue.prototype.$setup = setup
-Vue.prototype.$api = api
 Vue.prototype.$util = util
+Vue.prototype.$api = api
 Vue.prototype.$ajax = ajax
+Vue.prototype.$setup = setup
 
 Vue.config.productionTip = false
 

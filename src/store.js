@@ -13,7 +13,8 @@ export default new Vuex.Store({
       index: {
         lock: false
       }
-    }
+    },
+    basicURL: ''
   },
   mutations: {
 

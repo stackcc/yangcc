@@ -1,1 +1,1 @@
-import data from "@static/data.json"let library = {  data:data};export default library
+import data from '../../../static/json/test.json'// import data from "@/../static/json/test.json"// libraryexport default {  data: data}
