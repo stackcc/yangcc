@@ -136,6 +136,7 @@
   </div>
 </template>
 <script>
+  import testdata from "@static/data.json"
 export default {
   name: 'stack',
   components: {
@@ -194,6 +195,12 @@ export default {
   },
   mounted () {
     this.$util.log({ 'a': 1 })
+    this.$ajax.localFile("",{ name:'data' }).then(res=>{
+      debugger
+    })
+    // this.$ajax.localFile("",{ name:'data' }).then(res=>{
+    //   debugger
+    // })
   },
   computed: {},
   methods: {

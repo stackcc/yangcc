@@ -1,4 +1,9 @@
 const ThreeExamples = require('import-three-examples')
+const path = require('path')
+
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
 module.exports = {
   // process.env.NODE_ENV === 'production' ? '192.168.60.110:8080' : '192.168.60.110:8080',
   publicPath:  process.env.NODE_ENV === "production" ? "./" : "/",
@@ -33,8 +38,22 @@ module.exports = {
   // 是否为生产环境构建生成 source map？
   productionSourceMap: true,
   // 调整内部的 webpack 配置。
+  // chainWebpack: (config) => {
+  //   config.resolve.symlinks(true)
+  // },
   chainWebpack: (config) => {
-    config.resolve.symlinks(true)
+    config.resolve.alias
+      .set('@static', resolve('src/static'))
+      .set('@assets', resolve('src/assets'))
+      .set('@comp', resolve('src/components'))
+      .set('@c', resolve('src/assets/comm'))
+    // // 配置 webpack 识别 markdown 为普通的文件
+    // config.module
+    //   .rule('markdown')
+    //   .test(/\.md$/)
+    //   .use()
+    //   .loader('file-loader')
+    //   .end()
   },
   configureWebpack: () => {},
 

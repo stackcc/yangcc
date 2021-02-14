@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import QRCode from 'qrcode'
+import QRCode from 'src/views/fun/qrcode'
 export default {
   name: 'qrcode',
   components: {},

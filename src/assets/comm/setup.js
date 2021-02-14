@@ -1,7 +1,7 @@
 // 权限数据至少应该包括路由权限和资源权限。
 let setup = {
   app: {
-    bg: 'image/91.jpg'
+    bg: 'image/92.jpg'
   },
   home: {
     menu: [

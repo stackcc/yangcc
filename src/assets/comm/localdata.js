@@ -1,0 +1,1 @@
+import data from "@static/data.json"let library = {  data:data};export default library

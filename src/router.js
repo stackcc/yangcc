@@ -2,17 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Stack from './views/stack.vue'
 import Home from './views/Home.vue'
-import Index from './views/index.vue'
-import MapG from './views/map-g.vue'
-import Calendar from './views/calendar.vue'
-import Css3 from './views/css3.vue'
-import Qrcode from './views/qrcode.vue'
-import Theway from './views/theway.vue'
-import Way from './views/way.vue'
-import WayDetail from './views/wayDetail.vue'
-import Lotto from './views/lotto.vue'
 
-Vue.use(Router);
 let routes = [
   // 注释
   // { path: '/user/:id/name/:name',
@@ -34,19 +24,11 @@ let routes = [
     name: 'home',
     component: Home,
     children: [
-      { path: '/mapg', name: 'mapg', component: MapG },
-      { path: '/calendar', name: 'calendar', component: Calendar }
+      ...importPages(require.context('./views/threejs',true,/\.vue$/,'lazy')),
+      ...importPages(require.context('./views/doc',true,/\.vue$/,'lazy')),
+      ...importPages(require.context('./views/fun',true,/\.vue$/,'lazy'))
     ]
-  },
-  { path: '/about', name: 'about', component: () => import('./views/About.vue') },
-  { path: '/css3', name: 'css3', component: Css3 },
-  { path: '/qrcode', name: 'qrcode', component: Qrcode },
-  { path: '/theway', name: 'theway', component: Theway },
-  { path: '/way', name: 'way', component: Way },
-  { path: '/waydetail', name: 'waydetail', component: WayDetail },
-  { path: '/lotto', name: 'lotto', component: Lotto },
-
-
+  }
 ];
 
 /**
@@ -54,14 +36,19 @@ let routes = [
  * @param r
  */
 function importPages(r){
+  let list = [];
   r.keys().forEach(key=>{
-    routes.push({path:(key.split('.')[1]),name:((key.split(/[.\/]/))[2]),component:()=>r(key)})
-  })
+    list.push({
+      path:(key.split('.')[1]),
+      name:((key.split(/[.\/]/))[2]),
+      component:()=>r(key)
+    });
+    console.log(r, key)
+  });
+  return list
 }
-importPages(require.context('./views/threejs',true,/\.vue$/,'lazy'));
-importPages(require.context('./views/test',true,/\.vue$/,'lazy'));
-importPages(require.context('./views/doc',true,/\.vue$/,'lazy'));
 
+Vue.use(Router);
 const router = new Router({
   // mode: 'history',
   base: process.env.BASE_URL,

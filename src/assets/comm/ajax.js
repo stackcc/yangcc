@@ -1,6 +1,7 @@
 import axios from 'axios'
 import setup from './setup.js'
 import util from './util.js'
+import localdata from './localdata.js'
 import store from '../../store.js'
 import qs from 'qs'
 import { Message, Loading } from 'element-ui'
@@ -65,15 +66,15 @@ function successState (res) {
 
 // 封装axios--------------------------------------------------------------------------------------
 function apiAxios (method, url, data, headers, success, error) {
-  if(!setup.cc.ajax){return;}
-  if(!store.state.auth.cc){
-    errorState()
-    Message.error('权限失效')
-    return;
-  }
-  if(store.state.auth.cc){
-    data = Object.assign({'auth':'cc'},data);
-  }
+  // if(!setup.cc.ajax){return;}
+  // if(!store.state.auth.cc){
+  //   errorState()
+  //   Message.error('权限失效')
+  //   return;
+  // }
+  // if(store.state.auth.cc){
+  //   data = Object.assign({'auth':'cc'},data);
+  // }
   let httpDefault = {
     method: method,
     baseURL: baseURL,
@@ -126,6 +127,13 @@ let ajax = {
     }
     header = Object.assign({ 'Content-Type': 'application/x-www-form-urlencoded' }, header)
     return apiAxios('POST', url, data, header, success, error)
+  },
+  localFile(url, data, header, success, error){
+    return new Promise(resolve=>{
+      debugger
+      let result = localdata[data.name];
+      resolve(result)
+    });
   }
 }
 
