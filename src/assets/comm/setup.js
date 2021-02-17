@@ -3,6 +3,7 @@ let setup = {
   app: {
     bg: 'image/92.jpg'
   },
+  goIndex: false,
   home: {
     menu: [
       {

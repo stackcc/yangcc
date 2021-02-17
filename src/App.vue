@@ -14,7 +14,7 @@
           <router-view class="c_hidden c_w c_h" />
         </transition>
       </div>
-      <el-button class="goStack c_all_pointer c_pointer" type="info" icon="el-icon-wind-power" circle @click="goStack"></el-button>
+      <el-button v-show="goIndex" class="goStack c_all_pointer c_pointer" type="info" icon="el-icon-wind-power" circle @click="goStack"></el-button>
     </div>
   </div>
 </template>
@@ -24,7 +24,8 @@ export default {
   data () {
     return {
       bg_attribute: '',
-      transitionName: 'slide-bottom'
+      transitionName: 'slide-bottom',
+      goIndex: this.$setup.goIndex
     }
   },
   mounted () {
