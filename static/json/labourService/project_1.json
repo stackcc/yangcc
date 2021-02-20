@@ -1,0 +1,78 @@
+[
+	{
+		"JOBCODE" : "04",
+		"JOBNAME" : "04"
+	},
+	{
+		"JOBCODE" : "05",
+		"JOBNAME" : "05"
+	},
+	{
+		"JOBCODE" : "06",
+		"JOBNAME" : "06"
+	},
+	{
+		"JOBCODE" : "07",
+		"JOBNAME" : "07"
+	},
+	{
+		"JOBCODE" : "08",
+		"JOBNAME" : "08"
+	},
+	{
+		"JOBCODE" : "09",
+		"JOBNAME" : "09"
+	},
+	{
+		"JOBCODE" : "10",
+		"JOBNAME" : "10"
+	},
+	{
+		"JOBCODE" : "11",
+		"JOBNAME" : "11"
+	},
+	{
+		"JOBCODE" : "12",
+		"JOBNAME" : "12"
+	},
+	{
+		"JOBCODE" : "13",
+		"JOBNAME" : "13"
+	},
+	{
+		"JOBCODE" : "14",
+		"JOBNAME" : "14"
+	},
+	{
+		"JOBCODE" : "15",
+		"JOBNAME" : "15"
+	},
+	{
+		"JOBCODE" : "16",
+		"JOBNAME" : "16"
+	},
+	{
+		"JOBCODE" : "17",
+		"JOBNAME" : "17"
+	},
+	{
+		"JOBCODE" : "18",
+		"JOBNAME" : "18"
+	},
+	{
+		"JOBCODE" : "19",
+		"JOBNAME" : "19"
+	},
+	{
+		"JOBCODE" : "20",
+		"JOBNAME" : "20"
+	},
+	{
+		"JOBCODE" : "21",
+		"JOBNAME" : "21"
+	},
+	{
+		"JOBCODE" : "99",
+		"JOBNAME" : "其他"
+	}
+]

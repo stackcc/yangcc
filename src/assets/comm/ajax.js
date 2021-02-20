@@ -125,7 +125,10 @@ let ajax = {
       error = success
       success = header
     }
-    header = Object.assign({ 'Content-Type': 'application/x-www-form-urlencoded' }, header)
+    console.log(data)
+    data = qs.stringify(data)
+    console.log(data)
+    header = Object.assign({ 'Content-Type': 'application/x-www-form-urlencoded' })
     return apiAxios('POST', url, data, header, success, error)
   },
   localFile(url, data, header, success, error){

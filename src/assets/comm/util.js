@@ -288,7 +288,7 @@ let util = {
       case 'date':
         result =  y +'-'+
           (m <10 ? '0'+m : m) +'-'+
-          (d <10 ? '0'+d : d) +' ';
+          (d <10 ? '0'+d : d) +'';
         break;
       case 'time':
         result =  (h <10 ? '0'+h : h)+':'+

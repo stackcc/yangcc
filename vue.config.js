@@ -99,7 +99,9 @@ module.exports = {
     // 查阅 https://github.com/vuejs/vue-docs-zh-cn/blob/master/vue-cli/cli-service.md#配置代理
     proxy: {
       '^/api': {
-        target: 'http://antsman.cn:3000',
+        // target: 'http://antsman.cn:3000',
+        // target: 'http://192.168.1.105:9080',
+        target: 'http://192.168.1.100:8080',
         ws: true,
         changeOrigin: true,
         pathRewrite: {
