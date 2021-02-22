@@ -46,7 +46,7 @@ function errorState (response) {
     // 如果不需要除了data之外的数据，可以直接 return response.data
     return response
   } else {
-    Message.error('数据获取错误')
+    Message({ type: 'error', message: '数据获取错误', duration: 1000 })
   }
 }
 
@@ -56,10 +56,7 @@ function successState (res) {
   fullLoading.close()
   // 统一判断后端返回的错误码(错误码与后台协商而定)
   // if (res.data.code === '000000') {
-  Message({
-    message: 'success',
-    type: 'success'
-  })
+  // Message({ type: 'success', message: '成功', duration: 1000 })
   return res
   // }
 }
@@ -85,7 +82,7 @@ function apiAxios (method, url, data, headers, success, error) {
     params: method === 'GET' || method === 'DELETE' ? data : null,
     // data: method === 'POST' || method === 'PUT' ? qs.stringify(data) : null,
     data: data,
-    timeout: 10000
+    timeout: 90000
   }
 
   // 注意**Promise**使用(Promise首字母大写)

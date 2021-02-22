@@ -30,7 +30,7 @@ export default {
   },
   mounted () {
     if (this.$setup.app.bg) {
-      this.bg_attribute = 'background-image: url(' + this.$setup.app.bg + ');'
+      // this.bg_attribute = 'background-image: url(' + this.$setup.app.bg + ');'
     }
   },
   methods: {

@@ -26,9 +26,9 @@ let routes = [
     name: 'home',
     component: Home,
     children: [
-      ...importPages(require.context('./views/threejs',true,/\.vue$/,'lazy')),
-      ...importPages(require.context('./views/doc',true,/\.vue$/,'lazy')),
-      ...importPages(require.context('./views/fun',true,/\.vue$/,'lazy'))
+      // ...importssPages(require.context('./views/threejs',true,/\.vue$/,'lazy')),
+      // ...importPages(require.context('./views/doc',true,/\.vue$/,'lazy')),
+      // ...importPages(require.context('./views/fun',true,/\.vue$/,'lazy'))
     ]
   },
   {
