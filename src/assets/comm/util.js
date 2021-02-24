@@ -462,6 +462,7 @@ let util = {
     return false
   },
 
+  // 关闭页面
   close() {
     if (navigator.userAgent.indexOf("MSIE") > 0) {
       if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {
@@ -480,7 +481,7 @@ let util = {
       window.open('', '_self', '');
       window.close();
     }
-  }
+  },
 
 }
 // 数字 加减
