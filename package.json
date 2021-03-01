@@ -17,6 +17,7 @@
     "color-js": "^1.0.5",
     "core-js": "^2.6.10",
     "element-ui": "^2.12.0",
+    "file-saver": "^2.0.5",
     "highlight.js": "^9.15.10",
     "less": "^2.7.3",
     "less-loader": "^5.0.0",

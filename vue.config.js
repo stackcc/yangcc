@@ -101,7 +101,9 @@ module.exports = {
       '^/api': {
         // target: 'http://antsman.cn:3000',
         // target: 'http://192.168.1.105:9080',
-        target: 'http://192.168.1.100:8080',
+        // target: 'http://192.168.1.100:8080',
+        // target: 'http://192.168.43.211:8080',
+        target: 'http://192.168.100.121:9000',
         ws: true,
         changeOrigin: true,
         pathRewrite: {

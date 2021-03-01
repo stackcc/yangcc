@@ -63,6 +63,14 @@ npm i less@2.7.3 less-loader --save
 npm install -D sass-loader node-sass
 ```
 
+### excel
+```
+// 解析excel
+npm insall -S xlsx
+// 导出excel
+npm install -S file-saver
+```
+
 ###  threejs
 ```
 npm install three --save
