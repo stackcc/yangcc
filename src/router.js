@@ -31,6 +31,9 @@ let routes = [
       // ...importPages(require.context('./views/fun',true,/\.vue$/,'lazy'))
     ]
   },
+  // 劳务-2021
+  { path: '/labourServices/list', name: 'labourServices', component: () => import('./views/labourServices/list') },
+  { path: '/labourServices/print', name: 'labourServicesPrint', component: () => import('./views/labourServices/print') },
   {
     'path': '*',
     'redirect': '/404',
