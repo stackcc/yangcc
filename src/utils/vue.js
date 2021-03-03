@@ -1,0 +1,1 @@
+/** * vue 跳转新窗口 * path 新路由 * query 参数 */export function history_blank(path, query) {  let { href } = this.$router.resolve({    path: 'labourServices/print',    query: {      tableBodyData: JSON.stringify([]),      headerTableSelectionData: JSON.stringify({}),    }  });  window.open(href, '_blank');}
