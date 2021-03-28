@@ -18,7 +18,19 @@ let routes = [
   // },
 
   // 正式数据
-  { path: '/index', name: 'labourServices', component: () => import('./views/labourServices/list') },
+  // { path: '/index', name: 'labourServices', component: () => import('./views/labourServices/list') },
+  { path: '/index', redirect: '/labourServices' },
+  // 劳务报销
+  { path: '/labourServices', name: 'labourServices',
+    component: () => import('./views/labourServices/list'), meta:{
+      title: '劳务报酬费报销单',
+    }},
+  // 差旅费报销
+  { path: '/travelExpenses', name: 'travelExpenses',
+    component: () => import('./views/labourServices/travelExpenses') , meta:{
+      title: '差旅费报销单',
+    }},
+
   { path: '/', redirect: '/index' },
   { path: '/stack', name: 'stack', component: Stack },
   { path: '/404', name: '404',  component: () => import('./views/exception/404') },
@@ -34,6 +46,8 @@ let routes = [
   // 劳务-2021
   { path: '/labourServices/list', name: 'labourServices', component: () => import('./views/labourServices/list') },
   { path: '/labourServices/print', name: 'labourServicesPrint', component: () => import('./views/labourServices/print') },
+  // 差旅
+  { path: '/labourServices/printTravelExpenses', name: 'printTravelExpenses', component: () => import('./views/labourServices/printTravelExpenses') },
   {
     'path': '*',
     'redirect': '/404',

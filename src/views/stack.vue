@@ -1,23 +1,23 @@
 <template>
   <div class="c_container c_rela">
-    <vue-particles
-      :color="particles.color"
-      :particleOpacity="particles.particleOpacity"
-      :particlesNumber="particles.particlesNumber"
-      :shapeType="particles.shapeType"
-      :particleSize="particles.particleSize"
-      :linesColor="particles.linesColor"
-      :linesWidth="particles.linesWidth"
-      :lineLinked="particles.lineLinked"
-      :lineOpacity="particles.lineOpacity"
-      :linesDistance="particles.linesDistance"
-      :moveSpeed="particles.moveSpeed"
-      :hoverEffect="particles.hoverEffect"
-      :hoverMode="particles.hoverMode"
-      :clickEffect="particles.clickEffect"
-      :clickMode="particles.clickMode"
-      class="lizi">
-    </vue-particles>
+    <!--<vue-particles-->
+      <!--:color="particles.color"-->
+      <!--:particleOpacity="particles.particleOpacity"-->
+      <!--:particlesNumber="particles.particlesNumber"-->
+      <!--:shapeType="particles.shapeType"-->
+      <!--:particleSize="particles.particleSize"-->
+      <!--:linesColor="particles.linesColor"-->
+      <!--:linesWidth="particles.linesWidth"-->
+      <!--:lineLinked="particles.lineLinked"-->
+      <!--:lineOpacity="particles.lineOpacity"-->
+      <!--:linesDistance="particles.linesDistance"-->
+      <!--:moveSpeed="particles.moveSpeed"-->
+      <!--:hoverEffect="particles.hoverEffect"-->
+      <!--:hoverMode="particles.hoverMode"-->
+      <!--:clickEffect="particles.clickEffect"-->
+      <!--:clickMode="particles.clickMode"-->
+      <!--class="lizi">-->
+    <!--</vue-particles>-->
 
     <div class="c_flex c_flex_center route c_no_pointer">
       <el-autocomplete

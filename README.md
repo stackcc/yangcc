@@ -42,6 +42,16 @@ npm install qrcode
 ```
 npm install --save vue-cookies 
 ```
+### 动态title
+```
+npm install --save vue-wechat-title
+
+import VueWechatTitle from 'vue-wechat-title'
+Vue.use(VueWechatTitle)
+
+<router-view v-wechat-title='$route.meta.title' />
+```
+
 ###  端口异常
 ```
 npm install portfinder@1.0.21

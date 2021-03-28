@@ -11,7 +11,7 @@
           <!--</transition>-->
         <!--</div>-->
         <transition :name="transitionName">
-          <router-view class="c_hidden c_w c_h" />
+          <router-view v-wechat-title='$route.meta.title' class="c_hidden c_w c_h" />
         </transition>
       </div>
       <el-button v-show="goIndex" class="goStack c_all_pointer c_pointer" type="info" icon="el-icon-wind-power" circle @click="goStack"></el-button>

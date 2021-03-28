@@ -22,12 +22,16 @@ import cookies from 'vue-cookies'
 import aMap from 'vue-amap'
 
 // 插件 粒子配置
-import vueParticles from 'vue-particles'
+// import vueParticles from 'vue-particles'
+// Vue.use(vueParticles) // from 路径是highlight.js的路径，纯属自定义
 
 // markdown 配置
 import 'mavon-editor/dist/css/index.css'
 import mavonEditor from 'mavon-editor'
 import highlight from './assets/comm/highlight'
+
+//动态修改title
+import VueWechatTitle from 'vue-wechat-title'
 
 // import vueHighlightJS from 'vue-highlightjs'
 // import 'highlight.js/styles/atom-one-dark.css'
@@ -39,9 +43,9 @@ Vue.use(elementUI)
 // Vue.use(Antd)
 Vue.use(cookies)
 Vue.use(aMap)
-Vue.use(vueParticles) // from 路径是highlight.js的路径，纯属自定义
 Vue.use(highlight)
 Vue.use(mavonEditor)
+Vue.use(VueWechatTitle)
 // import axiox from './assets/comm/axios'
 // Vue.use(axios, vueAxios)
 Vue.prototype.$axios = axios
