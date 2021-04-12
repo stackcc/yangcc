@@ -28,7 +28,8 @@ export default {
   },
   mounted () {
     if (this.$setup.app.bg) {
-      this.bg_attribute = 'filter: blur(2px);background-image: url(' + this.$setup.app.bg + ');'
+      // 背景注释
+      // this.bg_attribute = 'filter: blur(2px);background-image: url(' + this.$setup.app.bg + ');'
     }
   },
   methods: {
