@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <div class="c_container_html">
-      <div class="c_container_bg c_w_100 c_h_100" :style="bg_attribute">
-      <!--<img :src="img" class="img_bg " alt="" />-->
-      </div>
+      <div class="c_container_bg c_w_100 c_h_100" :style="bg_attribute"></div>
       <div class="c_container_body c_w_100 c_h_100">
         <!--<div id="nav">-->
           <!--<transition name="fade">-->
@@ -30,7 +28,7 @@ export default {
   },
   mounted () {
     if (this.$setup.app.bg) {
-      // this.bg_attribute = 'background-image: url(' + this.$setup.app.bg + ');'
+      this.bg_attribute = 'filter: blur(2px);background-image: url(' + this.$setup.app.bg + ');'
     }
   },
   methods: {

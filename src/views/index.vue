@@ -15,7 +15,7 @@ export default {
   },
   data () {
     return {
-      bg_attribute: "background-image: url('/static/9.jpg');",
+      bg_attribute: "background-image: url('/static/91.jpg');",
       icon: 'el-icon-lock',
       lock: false
     }
