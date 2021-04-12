@@ -52,6 +52,11 @@ Vue.use(VueWechatTitle)
 <router-view v-wechat-title='$route.meta.title' />
 ```
 
+### 打印 
+```
+npm install vue-easy-print --save
+```
+
 ###  端口异常
 ```
 npm install portfinder@1.0.21
@@ -70,8 +75,11 @@ npm i less@2.7.3 less-loader --save
 
 ### [sass](https://cli.vuejs.org/config/).
 ```
-npm install -D sass-loader node-sass
+yarn config set registry https://registry.npm.taobao.org -g
+yarn config set sass_binary_site http://cdn.npm.taobao.org/dist/node-sass -g
+yarn add sass-loader node-sass --dev
 ```
+
 
 ### excel
 ```
