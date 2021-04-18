@@ -126,7 +126,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 内容
 ```
 /flower
-花语 - 3D
+花
 ```
 
 ```
