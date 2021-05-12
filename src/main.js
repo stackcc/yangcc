@@ -39,6 +39,7 @@ import VueWechatTitle from 'vue-wechat-title'
 
 // 自定义配置
 import { util, api, ajax, setup } from './assets/comm/comm'
+import tool from './utils/util'
 Vue.use(elementUI)
 // Vue.use(Antd)
 Vue.use(cookies)
@@ -53,6 +54,7 @@ Vue.prototype.$util = util
 Vue.prototype.$api = api
 Vue.prototype.$ajax = ajax
 Vue.prototype.$setup = setup
+Vue.prototype.$tool = tool
 
 Vue.config.productionTip = false
 
