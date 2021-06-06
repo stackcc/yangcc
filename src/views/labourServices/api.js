@@ -1,1 +1,0 @@
-// 劳务 apivar api = {  // 劳务+差旅 公共接口  // getData: '/api/service/GlLaborwage?userid=0001F8100000000000S1',  getData: '/service/GlLaborwage?userid=' + this.$route.query.userid,  // 差旅 接口  // travelExpense: '/api/service/GlTravelbx?userid=0001F8100000000000S1',  travelExpense: '/service/GlTravelbx?userid=' + this.$route.query.userid,}export default { ...api }
