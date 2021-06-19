@@ -30,6 +30,11 @@ let routes = [
     component: () => import('./views/labourServices/travelExpenses') , meta:{
       title: '差旅费报销单',
     }},
+  // 收入确认
+  { path: '/revenue', name: 'revenue',
+    component: () => import('./views/labourServices/revenue') , meta:{
+      title: '收入确认单',
+    }},
 
   { path: '/', redirect: '/index' },
   { path: '/stack', name: 'stack', component: Stack },
