@@ -25,16 +25,21 @@ let routes = [
     component: () => import('./views/labourServices/list'), meta:{
       title: '劳务报酬费报销单',
     }},
+  { path: '/labourServices/list', name: 'labourServices', component: () => import('./views/labourServices/list') },
+  { path: '/labourServices/print', name: 'labourServicesPrint', component: () => import('./views/labourServices/print') },
   // 差旅费报销
   { path: '/travelExpenses', name: 'travelExpenses',
     component: () => import('./views/labourServices/travelExpenses') , meta:{
       title: '差旅费报销单',
     }},
+  { path: '/labourServices/printTravelExpenses', name: 'printTravelExpenses', component: () => import('./views/labourServices/printTravelExpenses') },
+
   // 收入确认
   { path: '/revenue', name: 'revenue',
     component: () => import('./views/labourServices/revenue') , meta:{
       title: '收入确认单',
     }},
+  { path: '/labourServices/printRevenue', name: 'printRevenue', component: () => import('./views/labourServices/printRevenue') },
 
   { path: '/', redirect: '/index' },
   { path: '/stack', name: 'stack', component: Stack },
@@ -48,11 +53,6 @@ let routes = [
       // ...importPages(require.context('./views/fun',true,/\.vue$/,'lazy'))
     ]
   },
-  // 劳务-2021
-  { path: '/labourServices/list', name: 'labourServices', component: () => import('./views/labourServices/list') },
-  { path: '/labourServices/print', name: 'labourServicesPrint', component: () => import('./views/labourServices/print') },
-  // 差旅
-  { path: '/labourServices/printTravelExpenses', name: 'printTravelExpenses', component: () => import('./views/labourServices/printTravelExpenses') },
   {
     'path': '*',
     'redirect': '/404',
