@@ -100,10 +100,9 @@ module.exports = {
     proxy: {
       '^/api': {
         // target: 'http://antsman.cn:3000',
-        // target: 'http://192.168.1.105:9080',
-        // target: 'http://192.168.1.100:8080',
-        // target: 'http://192.168.43.211:8080',
-        target: 'http://192.168.100.121:9000',
+        target: 'http://192.168.100.121:9000',  //线上dev
+        // target: 'http://192.168.100.121:9080',  //线上dev - debug
+        // target: 'http://192.168.124.12:9080',
         ws: true,
         changeOrigin: true,
         pathRewrite: {
