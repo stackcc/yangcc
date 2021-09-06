@@ -41,6 +41,12 @@ let routes = [
     }},
   { path: '/labourServices/printRevenue', name: 'printRevenue', component: () => import('./views/labourServices/printRevenue') },
 
+  // 发票申请单
+  { path: '/invoice', name: 'invoice',
+    component: () => import('./views/labourServices/invoiceApplication') , meta:{
+      title: '发票申请单',
+    }},
+
   { path: '/', redirect: '/index' },
   { path: '/stack', name: 'stack', component: Stack },
   { path: '/404', name: '404',  component: () => import('./views/exception/404') },
