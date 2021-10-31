@@ -122,10 +122,23 @@ let ajax = {
       error = success
       success = header
     }
-    console.log(data)
     data = qs.stringify(data)
-    console.log(data)
     header = Object.assign({ 'Content-Type': 'application/x-www-form-urlencoded' })
+    return apiAxios('POST', url, data, header, success, error)
+  },
+  upLoad (url, data, header, success, error) {
+    if (header instanceof Function) {
+      error = success
+      success = header
+    }
+    let formData
+    if (data instanceof FormData) {
+      formData = data
+    } else {
+      formData = new FormData()
+      formData.append('file', data.file)
+    }
+    header = Object.assign({ 'Content-Type': 'multipart/form-data; boundary=something' })
     return apiAxios('POST', url, data, header, success, error)
   },
   localFile(url, data, header, success, error){
