@@ -19,7 +19,7 @@
     "highlight.js": "^9.15.10",
     "less": "^2.7.3",
     "less-loader": "^5.0.0",
-    "marked": "^0.7.0",
+    "marked": "^4.0.10",
     "mavon-editor": "^2.7.6",
     "portfinder": "^1.0.25",
     "qrcode": "^1.4.2",
